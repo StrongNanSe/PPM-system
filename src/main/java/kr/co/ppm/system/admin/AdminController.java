@@ -26,8 +26,8 @@ public class AdminController {
     public ModelAndView login(Admin admin, HttpSession session) {
         ModelAndView modelAndView = new ModelAndView(new RedirectView("/login"));
 
-        if ("".equals(admin.getId())
-                && "".equals(admin.getPassword())){
+        if (admin.getId() != ""
+                && admin.getPassword() != ""){
             if (adminService.login(admin)) {
                 session.setAttribute("login", admin);
 
