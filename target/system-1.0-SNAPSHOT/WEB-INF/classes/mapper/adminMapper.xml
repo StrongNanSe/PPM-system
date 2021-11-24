@@ -5,17 +5,16 @@
 
 <mapper namespace="kr.co.ppm.system.admin.AdminMapper">
     <resultMap id="adminResultMap"
-               type="kr.co.ppm.system.model.Admin">
+               type="kr.co.ppm.system.admin.Admin">
         <id column="ID" property="id" />
         <result column="PASSWORD" property="password" />
     </resultMap>
 
     <select id="select"
-            parameterType="kr.co.ppm.system.model.Admin"
+            parameterType="kr.co.ppm.system.admin.Admin"
             resultMap="adminResultMap">
-        SELECT
-            ID
-            , PASSWORD
+        SELECT ID
+                , PASSWORD
             FROM ADMIN
             <where>
                 ID = #{id}
