@@ -1,16 +1,15 @@
 package kr.co.ppm.system.parasol;
 
-import kr.co.ppm.system.model.MapInfo;
-import kr.co.ppm.system.model.Mark;
-import kr.co.ppm.system.model.Parasol;
+import kr.co.ppm.system.map.MapInfo;
+import kr.co.ppm.system.map.Mark;
 
 import java.util.List;
 
 public interface ParasolService {
-    public void registerParasol(Parasol parasol);
-    public List<MapInfo> ParasolList(Parasol parasol);
-    public MapInfo viewMap(List<Mark> marks);
-    public Parasol viewParasol(Parasol parasol);
-    public void editParasol(Parasol parasol);
-    public void receiveParasol();
+    void registerParasol(Parasol parasol);
+    List<Mark> ParasolList(Parasol parasol);
+    MapInfo viewMap(List<Mark> marks);
+    Parasol viewParasol(Parasol parasol);
+    void editParasol(Parasol parasol);
+    void receiveParasol();
 }

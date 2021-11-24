@@ -1,12 +1,13 @@
 package kr.co.ppm.system.parasol;
 
-import kr.co.ppm.system.model.Parasol;
+import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
 
+@Mapper
 public interface ParasolMapper {
-    public void add(Parasol parasol);
-    public List<Parasol> selectAll(Parasol parasol);
-    public Parasol selectByNo(Parasol parasol);
-    public void updateByNo(Parasol parasol);
+    void insert(Parasol parasol);
+    List<Parasol> selectAll(Parasol parasol);
+    Parasol selectById(Parasol parasol);
+    void updateById(Parasol parasol);
 }

@@ -1,20 +1,17 @@
 package kr.co.ppm.system.admin;
 
-import kr.co.ppm.system.model.Admin;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class AdminServiceImpl implements AdminService {
+    @Autowired
+    private AdminMapper adminMapper;
+
     @Override
     public boolean login(Admin admin) {
-        return false;
-    }
+        Admin selectAdmin = adminMapper.select(admin);
 
-    @Override
-    public void logout() {
-
-    }
-
-    @Override
-    public boolean viewAdmin(Admin admin) {
-        return false;
+        return selectAdmin != null;
     }
 }

@@ -1,7 +1,8 @@
 package kr.co.ppm.system.admin;
 
-import kr.co.ppm.system.model.Admin;
+import org.apache.ibatis.annotations.Mapper;
 
+@Mapper
 public interface AdminMapper {
-    public Admin select(Admin admin);
+    Admin select(Admin admin);
 }
