@@ -31,10 +31,15 @@ public class AdminController {
             if (adminService.login(admin)) {
                 session.setAttribute("login", admin);
 
-                modelAndView = new ModelAndView("admin/main");
+                modelAndView = new ModelAndView(new RedirectView("/parasol"));
                 modelAndView.addObject("admin", admin);
+            } else {
+                modelAndView.addObject("loginError", true);
             }
+        } else {
+            modelAndView.addObject("loginError", true);
         }
+
         return modelAndView;
     }
 

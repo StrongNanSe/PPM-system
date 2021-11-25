@@ -33,7 +33,7 @@
     </insert>
 
     <select id="selectAll"
-            parameterType="kr.co.ppm.system.parasolstatus.ParasolStatus"
+            parameterType="kr.co.ppm.system.parasol.Parasol"
             resultMap="parasolStatusResultMap">
         SELECT STATUS
                 , TEMPERATURE
@@ -48,7 +48,7 @@
     </select>
 
     <select id="selectByParasolId"
-            parameterType="kr.co.ppm.system.parasolstatus.ParasolStatus"
+            parameterType="kr.co.ppm.system.parasol.Parasol"
             resultMap="parasolStatusResultMap">
         SELECT @ROWNUM:=@ROWNUM+1
                 , PS.STATUS
@@ -59,7 +59,7 @@
         FROM PARASOL_STATUS PS
               , (SELECT @ROWNUM:=0) R
         <where>
-            PARASOL_ID = '000000009cab1d84'
+            PARASOL_ID = #{PARASOL_ID}
         </where>
         ORDER BY DATE_TIME DESC
         LIMIT 1

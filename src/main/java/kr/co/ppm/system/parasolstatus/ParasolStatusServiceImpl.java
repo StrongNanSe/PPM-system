@@ -4,39 +4,32 @@ import kr.co.ppm.system.map.MapInfo;
 import kr.co.ppm.system.map.Mark;
 import kr.co.ppm.system.parasol.Parasol;
 import kr.co.ppm.system.parasol.ParasolService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class ParasolStatusServiceImpl implements ParasolService {
-    @Override
-    public void registerParasol(Parasol parasol) {
+public class ParasolStatusServiceImpl implements ParasolStatusService {
+    @Autowired
+    private ParasolStatusMapper parasolStatusMapper;
 
+    @Override
+    public void registerStatus(ParasolStatus parasolStatus) {
+        parasolStatusMapper.insert(parasolStatus);
     }
 
     @Override
-    public List<Mark> ParasolList(Parasol parasol) {
-        return null;
+    public List<ParasolStatus> parasolStatusList(Parasol parasol) {
+        return parasolStatusMapper.selectAll(parasol);
     }
 
     @Override
-    public MapInfo viewMap(List<Mark> marks) {
-        return null;
+    public ParasolStatus viewParasolStatus(Parasol parasol) {
+        return parasolStatusMapper.selectByParasolId(parasol);
     }
 
     @Override
-    public Parasol viewParasol(Parasol parasol) {
-        return null;
-    }
-
-    @Override
-    public void editParasol(Parasol parasol) {
-
-    }
-
-    @Override
-    public void receiveParasol() {
-
+    public void receiveParasolStatus() {
     }
 }

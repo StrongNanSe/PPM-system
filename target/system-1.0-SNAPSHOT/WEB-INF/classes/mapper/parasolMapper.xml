@@ -74,11 +74,11 @@
         UPDATE PARASOL
         <set>
             <choose>
-                <when test="installAddress != null">
-                    INSTALL_ADDRESS = #{installAddress}
+                <when test="active != null">
+                    ACTIVE = #{active}
                 </when>
                 <otherwise>
-                    ACTIVE = #{active}
+                    INSTALL_ADDRESS = #{installAddress}
                 </otherwise>
             </choose>
         </set>

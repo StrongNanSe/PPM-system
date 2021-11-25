@@ -2,6 +2,8 @@ package kr.co.ppm.system.parasol;
 
 import kr.co.ppm.system.map.MapInfo;
 import kr.co.ppm.system.map.Mark;
+import kr.co.ppm.system.parasolstatus.ParasolStatus;
+import kr.co.ppm.system.parasolstatus.ParasolStatusMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,9 +20,8 @@ public class ParasolServiceImpl implements ParasolService {
     }
 
     @Override
-    public List<Mark> ParasolList(Parasol parasol) {
-
-        return null;
+    public List<Parasol> ParasolList(Parasol searchParasol) {
+        return parasolMapper.selectAll(searchParasol);
     }
 
     @Override
@@ -30,12 +31,12 @@ public class ParasolServiceImpl implements ParasolService {
 
     @Override
     public Parasol viewParasol(Parasol parasol) {
-        return null;
+        return parasolMapper.selectById(parasol);
     }
 
     @Override
     public void editParasol(Parasol parasol) {
-
+        parasolMapper.updateById(parasol);
     }
 
     @Override

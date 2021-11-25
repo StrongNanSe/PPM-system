@@ -8,7 +8,7 @@ public class ParasolStatus implements Serializable {
     private String status;
     private int temperature;
     private int windSpeed;
-    private char rainfall;
+    private String rainfall;
     private String dateTime;
 
     public ParasolStatus() {
@@ -55,11 +55,11 @@ public class ParasolStatus implements Serializable {
         this.windSpeed = windSpeed;
     }
 
-    public char getRainfall() {
+    public String getRainfall() {
         return rainfall;
     }
 
-    public void setRainfall(char rainfall) {
+    public void setRainfall(String rainfall) {
         this.rainfall = rainfall;
     }
 

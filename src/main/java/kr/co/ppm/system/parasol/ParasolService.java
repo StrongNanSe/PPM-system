@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface ParasolService {
     void registerParasol(Parasol parasol);
-    List<Mark> ParasolList(Parasol parasol);
+    List<Parasol> ParasolList(Parasol SearchParasol);
     MapInfo viewMap(List<Mark> marks);
     Parasol viewParasol(Parasol parasol);
     void editParasol(Parasol parasol);

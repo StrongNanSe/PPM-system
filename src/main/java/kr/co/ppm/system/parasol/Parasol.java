@@ -11,7 +11,7 @@ public class Parasol implements Serializable {
     private double latitude;
     private double longitude;
     private String agentIpAddress;
-    private char active;
+    private String active;
 
     public Parasol() {
 
@@ -81,11 +81,11 @@ public class Parasol implements Serializable {
         this.agentIpAddress = agentIpAddress;
     }
 
-    public char getActive() {
+    public String getActive() {
         return active;
     }
 
-    public void setActive(char active) {
+    public void setActive(String active) {
         this.active = active;
     }
 

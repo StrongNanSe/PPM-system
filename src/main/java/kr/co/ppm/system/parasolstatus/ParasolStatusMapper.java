@@ -9,5 +9,5 @@ import java.util.List;
 public interface ParasolStatusMapper {
     void insert(ParasolStatus parasolStatus);
     List<ParasolStatus> selectAll(Parasol parasol);
-    ParasolStatus selectByNo(Parasol parasol);
+    ParasolStatus selectByParasolId(Parasol parasol);
 }
