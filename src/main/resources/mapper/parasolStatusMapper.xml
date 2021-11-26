@@ -42,7 +42,7 @@
                 , DATE_TIME
         FROM PARASOL_STATUS
         <where>
-            PARASOL_ID = #{PARASOL_ID}
+            PARASOL_ID = #{id}
         </where>
         ORDER BY DATE_TIME DESC
     </select>
@@ -59,7 +59,7 @@
         FROM PARASOL_STATUS PS
               , (SELECT @ROWNUM:=0) R
         <where>
-            PARASOL_ID = #{PARASOL_ID}
+            PARASOL_ID = #{id}
         </where>
         ORDER BY DATE_TIME DESC
         LIMIT 1

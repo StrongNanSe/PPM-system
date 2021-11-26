@@ -5,16 +5,14 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>test</title>
+<title>상세 정보</title>
 </head>
 <body>
-    <h1>조회</h1>
+    <h1>상세 정보</h1>
     <a href="/parasol"><input type="button" value="[메인]"></a>
+    <a href="/logout"><input type="button" value="[로그아웃]" /></a><br/><br/>
+    <a href="/status/${parasol.id}"><input type="button" value="[상태 정보 목록 보기]"></a>
     <table border="1">
-        <tr>
-            <th>아이디</th>
-            <td>${parasol.id}</td>
-        </tr>
         <tr>
             <th>관리번호</th>
             <td>${parasol.managementNo}</td>
@@ -59,8 +57,7 @@
                 </c:choose>
             </td>
         </tr>
-    </table>
-    <a href="/status"><input type="button" value="[파라솔 상태 기록 보기]"></a>
+    </table><br/><br/>
 </body>
 <script>
     document.getElementById("button_editAddress").addEventListener("click", editAddressPopup, false);

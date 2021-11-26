@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -37,7 +38,7 @@ public class ParasolController {
 
     @GetMapping("/{id}")
     public ModelAndView viewParasol(Parasol parasol) {
-        ModelAndView modelAndView = new ModelAndView("/parasol/view");
+        ModelAndView modelAndView = new ModelAndView("parasol/view");
         modelAndView.addObject("parasol", parasolService.viewParasol(parasol));
 
         logger.debug(parasol.toString());
@@ -57,7 +58,7 @@ public class ParasolController {
 
     @GetMapping(value = "/map", consumes = MediaType.APPLICATION_JSON_VALUE)
     public List<Mark> viewMap(Parasol searchParasol) {
-        List<Mark> markList = null;
+        List<Mark> markList = new ArrayList<Mark>();
         List<Parasol> parasolList = parasolService.ParasolList(searchParasol);
 
         for (Parasol parasol : parasolList) {

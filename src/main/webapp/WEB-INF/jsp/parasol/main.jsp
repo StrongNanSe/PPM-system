@@ -5,18 +5,18 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>test</title>
+<title>메인</title>
 </head>
 <br>
     <h1>MAIN</h1>
     <h3>관리자 : ${sessionScope.login.id}</h3>
-    <a href="/logout"><input type="button" value="[로그아웃]" /></a></br>
+    <a href="/logout"><input type="button" value="[로그아웃]" /></a><br/>
     <input type="search" id="search" />
     <input type="button" id="button_search" value="[검색]" />
     <div id="table">
         <table border="1">
             <tr>
-                <th>INDEX</th>
+                <th>NO</th>
                 <th>관리번호</th>
             </tr>
             <c:forEach items="${parasolList}" var="parasol" varStatus="index">
