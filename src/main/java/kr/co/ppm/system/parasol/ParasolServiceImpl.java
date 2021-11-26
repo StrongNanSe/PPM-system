@@ -2,8 +2,6 @@ package kr.co.ppm.system.parasol;
 
 import kr.co.ppm.system.map.MapInfo;
 import kr.co.ppm.system.map.Mark;
-import kr.co.ppm.system.parasolstatus.ParasolStatus;
-import kr.co.ppm.system.parasolstatus.ParasolStatusMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

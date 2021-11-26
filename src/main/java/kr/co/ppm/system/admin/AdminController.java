@@ -17,10 +17,14 @@ public class AdminController {
     @Autowired
     private AdminService adminService;
     private Logger logger = LogManager.getLogger(AdminController.class);
+    private boolean adminMatch = true;
 
     @GetMapping("/login")
     public ModelAndView loginForm() {
-        return new ModelAndView("admin/loginForm");
+        ModelAndView modelAndView = new ModelAndView("admin/loginForm");
+        modelAndView.addObject("adminMatch", adminMatch);
+
+        return modelAndView;
     }
 
     @PostMapping("/login")
@@ -28,9 +32,9 @@ public class AdminController {
         new LoginValidator().validate(admin, errors);
         ModelAndView modelAndView = new ModelAndView(new RedirectView("/login"));
 
-        if (admin.getId() != ""
-                && admin.getPassword() != ""){
-            if (adminService.login(admin)) {
+        if (adminMatch = !errors.hasErrors()){
+            adminMatch = adminService.login(admin);
+            if (adminMatch) {
                 session.setAttribute("login", admin);
                 modelAndView = new ModelAndView(new RedirectView("/parasol"));
                 modelAndView.addObject("admin", admin);
