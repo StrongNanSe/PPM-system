@@ -6,6 +6,7 @@ public class ParasolStatus implements Serializable {
     private int no;
     private String parasolId;
     private String status;
+    private String angle;
     private int temperature;
     private int windSpeed;
     private String rainfall;
@@ -37,6 +38,14 @@ public class ParasolStatus implements Serializable {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public String getAngle() {
+        return angle;
+    }
+
+    public void setAngle(String angle) {
+        this.angle = angle;
     }
 
     public int getTemperature() {
@@ -77,9 +86,10 @@ public class ParasolStatus implements Serializable {
                 "no=" + no +
                 ", parasolId='" + parasolId + '\'' +
                 ", status='" + status + '\'' +
+                ", angle='" + angle + '\'' +
                 ", temperature=" + temperature +
                 ", windSpeed=" + windSpeed +
-                ", rainfall=" + rainfall +
+                ", rainfall='" + rainfall + '\'' +
                 ", dateTime='" + dateTime + '\'' +
                 '}';
     }

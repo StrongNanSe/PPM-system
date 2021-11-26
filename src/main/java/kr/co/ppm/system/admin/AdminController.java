@@ -3,6 +3,7 @@ package kr.co.ppm.system.admin;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -23,7 +24,8 @@ public class AdminController {
     }
 
     @PostMapping("/login")
-    public ModelAndView login(Admin admin, HttpSession session) {
+    public ModelAndView login(Admin admin, Errors errors, HttpSession session) {
+        new LoginValidator().validate(admin, errors);
         ModelAndView modelAndView = new ModelAndView(new RedirectView("/login"));
 
         if (admin.getId() != ""
