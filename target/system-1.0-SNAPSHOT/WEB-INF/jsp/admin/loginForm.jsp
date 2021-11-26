@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <!DOCTYPE html>
@@ -19,6 +20,9 @@
 				<td><input type="password" name="password"/></td>
 			</tr>
 		</table>
+		<c:if test="${adminMatch eq false}">
+			<h4 style="color:red">아이디 비밀번호가 일치 하지 않습니다.</h4>
+		</c:if>
 		<input type="submit" value="[로그인]" />
 	</form>
 </body>
