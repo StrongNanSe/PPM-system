@@ -26,8 +26,8 @@ public class ParasolStatusController {
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public String receiveParasolStatus(@RequestBody ParasolStatus parasolStatus) {
-        String code = parasolStatusService.receiveParasolStatus(parasolStatus);
+        parasolStatus.setStatus("접힘");
 
-        return code;
+        return parasolStatusService.receiveParasolStatus(parasolStatus);
     }
 }

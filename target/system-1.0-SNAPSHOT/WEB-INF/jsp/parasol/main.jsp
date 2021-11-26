@@ -30,7 +30,7 @@
             </c:forEach>
         </table>
     </div>
-    <div id="map" style="width:50%;height:500px;"></div>
+    <div id="map" class="" style="width:50%;height:500px;"></div>
     <script>
         var mapOptions = { // 지도 옵션 중심 설정
             center: new naver.maps.LatLng(37.4420792, 127.1363692),
