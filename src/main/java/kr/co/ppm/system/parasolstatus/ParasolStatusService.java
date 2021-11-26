@@ -8,5 +8,5 @@ public interface ParasolStatusService {
     void registerStatus(ParasolStatus parasolStatus);
     List<ParasolStatus> parasolStatusList(Parasol parasol);
     ParasolStatus viewParasolStatus(Parasol parasol);
-    void receiveParasolStatus();
+    String receiveParasolStatus(ParasolStatus parasolStatus);
 }

@@ -11,5 +11,5 @@ public interface ParasolService {
     MapInfo viewMap(List<Mark> marks);
     Parasol viewParasol(Parasol parasol);
     void editParasol(Parasol parasol);
-    void receiveParasol();
+    String receiveParasol(Parasol parasol);
 }

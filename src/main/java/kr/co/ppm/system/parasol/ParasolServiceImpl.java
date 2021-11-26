@@ -40,7 +40,19 @@ public class ParasolServiceImpl implements ParasolService {
     }
 
     @Override
-    public void receiveParasol() {
+    public String receiveParasol(Parasol parasol) {
+        if (null == parasolMapper.selectById(parasol)) {
+            parasolMapper.insert(parasol);
+        };
 
+        String code = "{" +
+                "    \"code\": \"200\"," +
+                "    \"error\": {" +
+                "        \"errorCode\": \"0\"," +
+                "        \"message\": \"null\"" +
+                "    }" +
+                "}";
+
+        return code;
     }
 }

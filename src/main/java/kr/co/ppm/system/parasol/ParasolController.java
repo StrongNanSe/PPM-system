@@ -74,7 +74,9 @@ public class ParasolController {
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public void receiveParasol(Parasol parasol) {
+    public String receiveParasol(@RequestBody Parasol parasol) {
+        String code = parasolService.receiveParasol(parasol);
 
+        return code;
     }
 }

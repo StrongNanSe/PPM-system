@@ -30,6 +30,17 @@ public class ParasolStatusServiceImpl implements ParasolStatusService {
     }
 
     @Override
-    public void receiveParasolStatus() {
+    public String receiveParasolStatus(ParasolStatus parasolStatus) {
+        parasolStatusMapper.insert(parasolStatus);
+
+        String code = "{" +
+                "    \"code\": \"200\"," +
+                "    \"error\": {" +
+                "        \"errorCode\": \"0\"," +
+                "        \"message\": \"null\"" +
+                "    }" +
+                "}";
+
+        return code;
     }
 }
