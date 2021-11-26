@@ -22,20 +22,32 @@
             </tr>
             <c:forEach items="${parasolList}" var="parasol" varStatus="index">
                 <tr>
-                    <td>${index.count}</td>
-                    <td><a href="/parasol/${parasol.id}">${parasol.managementNo}</a></td>
+                    <td style="text-align: center">${index.count}</td>
+                    <td><input type="button" id="button_move_map" value="${parasol.managementNo}" /></td>
+                    <input type="hidden" id="latitude${index.count}" value="${parasol.latitude}" />
+                    <input type="hidden" id="longitude${index.count}" value="${parasol.longitude}" />
                 </tr>
             </c:forEach>
         </table>
     </div>
-    <div id="map" style="width:50%;height:300px;"></div>
+    <div id="map" class="" style="width:50%;height:500px;"></div>
     <script>
-        var mapOptions = {
-            center: new naver.maps.LatLng(37.3595704, 127.105399),
+        var mapOptions = { // 지도 옵션 중심 설정
+            center: new naver.maps.LatLng(37.4420792, 127.1363692),
             zoom: 10
         };
 
         var map = new naver.maps.Map('map', mapOptions);
+
+        for (var i = 0; i < ${parasolList.size()}; i++) {
+
+            console.log(document.getElementById("latitude" + (i + 1)).value);
+
+            new naver.maps.Marker({ // 마커 표시
+                position: new naver.maps.LatLng(document.getElementById("latitude" + (i + 1)).value, document.getElementById("longitude" + (i + 1)).value),
+                map: map
+            });
+        }
 
         document.getElementById("button_search").addEventListener("click", search, false);
 
