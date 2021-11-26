@@ -80,11 +80,11 @@
 
     function editActivePopup() {
         if ("${parasol.active}" == "Y") {
-            if (confirm("비활성 상태로 바꾸시겠습니까?")) {
+            if (confirm("비활성 상태로 변경하시겠습니까?")) {
                 sendEdit({"id":"${parasol.id}","active":"N"});
             }
         } else {
-            if (confirm("활성 상태로 바꾸시겠습니까?")) {
+            if (confirm("활성 상태로 변경하시겠습니까?")) {
                 sendEdit({"id":"${parasol.id}","active":"Y"});
             }
         }

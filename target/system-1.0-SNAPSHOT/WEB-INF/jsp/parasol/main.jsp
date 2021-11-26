@@ -4,10 +4,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>메인</title>
+    <meta charset="UTF-8">
+    <title>메인</title>
+    <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=mpvl2mrnbq"></script>
 </head>
-<br>
+<body>
     <h1>MAIN</h1>
     <h3>관리자 : ${sessionScope.login.id}</h3>
     <a href="/logout"><input type="button" value="[로그아웃]" /></a><br/>
@@ -27,7 +28,15 @@
             </c:forEach>
         </table>
     </div>
+    <div id="map" style="width:50%;height:300px;"></div>
     <script>
+        var mapOptions = {
+            center: new naver.maps.LatLng(37.3595704, 127.105399),
+            zoom: 10
+        };
+
+        var map = new naver.maps.Map('map', mapOptions);
+
         document.getElementById("button_search").addEventListener("click", search, false);
 
         function search() {

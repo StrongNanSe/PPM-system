@@ -1,5 +1,6 @@
 package kr.co.ppm.system.parasol;
 
+import kr.co.ppm.system.map.MapInfo;
 import kr.co.ppm.system.map.Mark;
 import kr.co.ppm.system.parasolstatus.ParasolStatus;
 import kr.co.ppm.system.parasolstatus.ParasolStatusService;
@@ -70,11 +71,12 @@ public class ParasolController {
                     , parasolStatus.getDateTime()));
         }
 
+        logger.debug(markList);
+
         return markList;
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public void receiveParasol(Parasol parasol) {
-
     }
 }
