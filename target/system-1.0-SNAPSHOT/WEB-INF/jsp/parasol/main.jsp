@@ -23,7 +23,7 @@
             <c:forEach items="${parasolList}" var="parasol" varStatus="index">
                 <tr>
                     <td style="text-align: center">${index.count}</td>
-                    <td><input type="button" id="button_move_map" value="${parasol.managementNo}" /></td>
+                    <td><input type="button" class="button_move_map" id="button_move_map${index.count}" value="${parasol.managementNo}" /></td>
                     <input type="hidden" id="latitude${index.count}" value="${parasol.latitude}" />
                     <input type="hidden" id="longitude${index.count}" value="${parasol.longitude}" />
                 </tr>
@@ -32,8 +32,7 @@
     </div>
     <div id="map" class="" style="width:50%;height:500px;"></div>
     <script>
-        var mapOptions = { // 지도 옵션 중심 설정
-            center: new naver.maps.LatLng(37.4420792, 127.1363692),
+        var mapOptions = { // 지도 옵션 설정
             zoom: 10
         };
 
@@ -47,6 +46,20 @@
                 position: new naver.maps.LatLng(document.getElementById("latitude" + (i + 1)).value, document.getElementById("longitude" + (i + 1)).value),
                 map: map
             });
+        }
+
+        var table = document.querySelectorAll("#table .button_move_map");
+
+        console.log(table.length);
+
+        for (var i = 0; i < table.length; i++) {
+            table[i].addEventListener("click", moveMap());
+        }
+
+        function moveMap(buttonNo) {
+            console.log(document.getElementById("latitude" + (buttonNo + 1)).value, document.getElementById("longitude" + (buttonNo + 1)).value);
+            /*map.setCenter(document.getElementById("latitude" + (buttonNo + 1)).value, document.getElementById("longitude" + (buttonNo + 1)).value);*/
+            /*map.setZoom(14);*/
         }
 
         document.getElementById("button_search").addEventListener("click", search, false);
