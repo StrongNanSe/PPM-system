@@ -25,6 +25,8 @@ public class ParasolController {
 
     @GetMapping
     public ModelAndView parasolMain(Parasol parasol) {
+        logger.debug(parasol);
+
         ModelAndView modelAndView = new ModelAndView("parasol/main");
         modelAndView.addObject("parasolList", parasolService.ParasolList(parasol));
 
@@ -75,8 +77,6 @@ public class ParasolController {
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public String receiveParasol(@RequestBody Parasol parasol) {
-        String code = parasolService.receiveParasol(parasol);
-
-        return code;
+        return parasolService.receiveParasol(parasol);
     }
 }
