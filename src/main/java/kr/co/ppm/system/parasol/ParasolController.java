@@ -1,6 +1,5 @@
 package kr.co.ppm.system.parasol;
 
-import kr.co.ppm.system.map.Mark;
 import kr.co.ppm.system.parasolstatus.ParasolStatus;
 import kr.co.ppm.system.parasolstatus.ParasolStatusService;
 import org.apache.logging.log4j.LogManager;
@@ -24,18 +23,27 @@ public class ParasolController {
     private Logger logger = LogManager.getLogger(ParasolController.class);
 
     @GetMapping
-    public ModelAndView parasolMain(Parasol parasol) {
-        logger.debug(parasol);
+    public ModelAndView parasolList(Parasol searchParasol) {
+        logger.debug(searchParasol);
 
         ModelAndView modelAndView = new ModelAndView("parasol/main");
-        modelAndView.addObject("parasolList", parasolService.ParasolList(parasol));
+
+        List<Mark> markList = new ArrayList<Mark>();
+        List<Parasol> parasolList = parasolService.parasolList(searchParasol);
+
+        for (Parasol parasol : parasolList) {
+            ParasolStatus parasolStatus = parasolStatusService.viewParasolStatus(parasol);
+
+            logger.debug(parasolStatus);
+
+            markList.add(new Mark(parasol.getId(), parasol.getManagementNo(), parasol.getLatitude()
+                    , parasol.getLongitude(), parasol.getAgentIpAddress(), parasol.getActive()
+                    , parasolStatus.getStatus(), parasolStatus.getTemperature(), parasolStatus.getDateTime()));
+        }
+
+        modelAndView.addObject("markList", markList);
 
         return modelAndView;
-    }
-
-    @GetMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public List<Parasol> parasolList(Parasol searchParasol) {
-        return parasolService.ParasolList(searchParasol);
     }
 
     @GetMapping("/{id}")
@@ -56,23 +64,6 @@ public class ParasolController {
         logger.debug(parasol.toString());
 
         return modelAndView;
-    }
-
-    @GetMapping(value = "/map", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public List<Mark> viewMap(Parasol searchParasol) {
-        List<Mark> markList = new ArrayList<Mark>();
-        List<Parasol> parasolList = parasolService.ParasolList(searchParasol);
-
-        for (Parasol parasol : parasolList) {
-            ParasolStatus parasolStatus = parasolStatusService.viewParasolStatus(parasol);
-
-            markList.add(new Mark(parasol.getId(), parasol.getManagementNo(), parasol.getLatitude(), parasol.getLongitude()
-                    , parasol.getAgentIpAddress(), parasol.getActive(), parasolStatus.getStatus()
-                    , parasolStatus.getTemperature(), parasolStatus.getWindSpeed(), parasolStatus.getRainfall()
-                    , parasolStatus.getDateTime()));
-        }
-
-        return markList;
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)

@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface ControlService {
     void sendControl(Parasol parasol, String action);
-    List<String> analysisStatus(ParasolStatus parasolStatus);
+    String analysisStatus(ParasolStatus parasolStatus);
 }

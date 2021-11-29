@@ -1,10 +1,9 @@
 package kr.co.ppm.system.parasol;
 
-import kr.co.ppm.system.map.MapInfo;
-import kr.co.ppm.system.map.Mark;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -13,23 +12,17 @@ public class ParasolServiceImpl implements ParasolService {
     private ParasolMapper parasolMapper;
 
     @Override
-    public void registerParasol(Parasol parasol) {
-        parasolMapper.insert(parasol);
-    }
-
-    @Override
-    public List<Parasol> ParasolList(Parasol searchParasol) {
-        return parasolMapper.selectAll(searchParasol);
-    }
-
-    @Override
-    public MapInfo viewMap(List<Mark> marks) {
-        return null;
+    public List<Parasol> parasolList(Parasol searchParasol) {
+        return parasolMapper.selectAll(searchParasol) != null
+                ? parasolMapper.selectAll(searchParasol)
+                : new ArrayList<Parasol>();
     }
 
     @Override
     public Parasol viewParasol(Parasol parasol) {
-        return parasolMapper.selectById(parasol);
+        return parasolMapper.selectById(parasol) != null
+                ? parasolMapper.selectById(parasol)
+                : new Parasol();
     }
 
     @Override
@@ -41,7 +34,7 @@ public class ParasolServiceImpl implements ParasolService {
     public String receiveParasol(Parasol parasol) {
         if (null == parasolMapper.selectById(parasol)) {
             parasolMapper.insert(parasol);
-        };
+        }
 
         String code = "{" +
                 "    \"code\": \"200\"," +

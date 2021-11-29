@@ -17,6 +17,10 @@ public class Parasol implements Serializable {
 
     }
 
+    public Parasol(String id) {
+        this.id = id;
+    }
+
     public String getId() {
         return id;
     }

@@ -10,8 +10,6 @@
         <result column="PARASOL_ID" property="parasolId" />
         <result column="STATUS" property="status" />
         <result column="TEMPERATURE" property="temperature" />
-        <result column="WIND_SPEED" property="windSpeed" />
-        <result column="RAINFALL" property="rainfall" />
         <result column="DATE_TIME" property="dateTime" />
     </resultMap>
 
@@ -21,14 +19,10 @@
                 (PARASOL_ID
                 , STATUS
                 , TEMPERATURE
-                , WIND_SPEED
-                , RAINFALL
                 , DATE_TIME)
         VALUES (#{parasolId}
                 , #{status}
                 , #{temperature}
-                , #{windSpeed}
-                , #{rainfall}
                 , NOW())
     </insert>
 
@@ -37,8 +31,6 @@
             resultMap="parasolStatusResultMap">
         SELECT STATUS
                 , TEMPERATURE
-                , WIND_SPEED
-                , RAINFALL
                 , DATE_TIME
         FROM PARASOL_STATUS
         <where>
@@ -53,8 +45,6 @@
         SELECT @ROWNUM:=@ROWNUM+1
                 , PS.STATUS
                 , PS.TEMPERATURE
-                , PS.WIND_SPEED
-                , PS.RAINFALL
                 , PS.DATE_TIME
         FROM PARASOL_STATUS PS
               , (SELECT @ROWNUM:=0) R

@@ -10,17 +10,24 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Hashtable;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class ControlServiceImpl implements ControlService{
     @Autowired
     private ParasolMapper parasolMapper;
     private Logger logger = LogManager.getLogger(ControlServiceImpl.class);
+    private Map<String, String> actionList = new Hashtable<String, String>();
 
     @Override
     public void sendControl(Parasol parasol, String action) {
-        String agentIpAddress = parasolMapper.selectById(parasol).getAgentIpAddress();
+        Parasol controlParasol = parasolMapper.selectById(parasol);
+
+        actionList.put(controlParasol.getId(), action);
+
         String url = "http://" + "localhost:8080" + "/device/" + action;
 
         logger.info("this is url : " + url);
@@ -29,13 +36,22 @@ public class ControlServiceImpl implements ControlService{
             String response = sendGetType(url);
             logger.info(response);
         } catch (Exception e) {
-            //오류 처리 필요
+            // TODO 오류처리
             logger.info(e.toString());
         }
     }
 
     @Override
-    public List<String> analysisStatus(ParasolStatus parasolStatus) {
+    public String analysisStatus(ParasolStatus parasolStatus) {
+        String receiveId = parasolStatus.getParasolId();
+        String sendAction = actionList.get(receiveId);
+
+        if (actionList.containsKey(receiveId)) {
+            if (!(sendAction.equals(parasolStatus.getStatus()))) {
+                return sendAction;
+            }
+        }
+
         return null;
     }
 

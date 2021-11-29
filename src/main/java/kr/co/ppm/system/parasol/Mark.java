@@ -1,4 +1,4 @@
-package kr.co.ppm.system.map;
+package kr.co.ppm.system.parasol;
 
 import java.io.Serializable;
 
@@ -11,8 +11,6 @@ public class Mark implements Serializable {
     private String active;
     private String status;
     private int temperature;
-    private int windSpeed;
-    private String rainfall;
     private String dateTime;
 
     public Mark() {
@@ -20,7 +18,7 @@ public class Mark implements Serializable {
     }
 
     public Mark(String id, String managementNo, double latitude, double longitude, String agentIpAddress,
-                String active, String status, int temperature, int windSpeed, String rainfall, String dateTime) {
+                String active, String status, int temperature, String dateTime) {
         this.id = id;
         this.managementNo = managementNo;
         this.latitude = latitude;
@@ -29,8 +27,6 @@ public class Mark implements Serializable {
         this.active = active;
         this.status = status;
         this.temperature = temperature;
-        this.windSpeed = windSpeed;
-        this.rainfall = rainfall;
         this.dateTime = dateTime;
     }
 
@@ -96,22 +92,6 @@ public class Mark implements Serializable {
 
     public void setTemperature(int temperature) {
         this.temperature = temperature;
-    }
-
-    public int getWindSpeed() {
-        return windSpeed;
-    }
-
-    public void setWindSpeed(int windSpeed) {
-        this.windSpeed = windSpeed;
-    }
-
-    public String getRainfall() {
-        return rainfall;
-    }
-
-    public void setRainfall(String rainfall) {
-        this.rainfall = rainfall;
     }
 
     public String getDateTime() {

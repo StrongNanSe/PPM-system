@@ -48,30 +48,37 @@
                 <th>NO</th>
                 <th>관리번호</th>
             </tr>
-            <c:forEach items="${parasolList}" var="parasol" varStatus="index">
-                <tr>
-                    <td style="text-align: right">${index.count}</td>
-                    <td><input type="button" id="button_move_map${index.count}" style="width: inherit" value="${parasol.managementNo}" /></td>
-                    <script>
-                        document.getElementById("button_move_map${index.count}").addEventListener("click", function () {
-                            let latitude = ${parasol.latitude};
-                            let longitude = ${parasol.longitude};
+            <c:choose>
+                <c:when test="${markList.size() > 0}">
+                    <c:forEach items="${markList}" var="mark" varStatus="index">
+                        <tr>
+                            <td style="text-align: right">${index.count}</td>
+                            <td><input type="button" id="button_move_map${index.count}" style="width: inherit" value="${mark.managementNo}" /></td>
+                            <script>
+                                document.getElementById("button_move_map${index.count}").addEventListener("click", function () {
+                                    let latitude = ${mark.latitude};
+                                    let longitude = ${mark.longitude};
 
-                            moveMap(latitude, longitude);
-                        });
+                                    moveMap(latitude, longitude);
+                                });
+                            </script>
+                            <input type="hidden" id="id${index.count}" value="${mark.id}" />
+                            <input type="hidden" id="managementNo${index.count}" value="${mark.managementNo}" />
+                            <input type="hidden" id="latitude${index.count}" value="${mark.latitude}" />
+                            <input type="hidden" id="longitude${index.count}" value="${mark.longitude}" />
+                            <input type="hidden" id="agentIpAdress${index.count}" value="${mark.agentIpAddress}" />
+                            <input type="hidden" id="active${index.count}" value="${mark.active}" />
+                            <input type="hidden" id="status${index.count}" value="${mark.status}" />
+                            <input type="hidden" id="temperature${index.count}" value="${mark.temperature}" />
+                            <input type="hidden" id="dateTime${index.count}" value="${mark.dateTime}" />
+                        </tr>
+                    </c:forEach>
+                </c:when>
+                <c:otherwise>
+                    <p>검색 결과가 없습니다.</p>
+                </c:otherwise>
+            </c:choose>
 
-                        var contentString = [
-                            '<div class="iw_inner">',
-                            '   <a href="/parasol/${parasol.id}">${parasol.managementNo}</a>',
-                            '</div>'
-                        ].join('');
-                    </script>
-                    <input type="hidden" id="latitude${index.count}" value="${parasol.latitude}" />
-                    <input type="hidden" id="longitude${index.count}" value="${parasol.longitude}" />
-                    <input type="hidden" id="id${index.count}" value="${parasol.id}" />
-                    <input type="hidden" id="managementNo${index.count}" value="${parasol.managementNo}" />
-                </tr>
-            </c:forEach>
         </table>
     </div>
     <div id="map"></div>
@@ -85,10 +92,14 @@
         let markers = [];
         let infowindows = [];
 
-        for (var i = 0; i < ${parasolList.size()}; i++) {
+        for (var i = 0; i < ${markList.size()}; i++) {
 
             let id = document.getElementById("id" + (i + 1)).value;
             let managementNo = document.getElementById("managementNo" + (i + 1)).value;
+            let active = document.getElementById("active" + (i + 1)).value;
+            let status = document.getElementById("status" + (i + 1)).value;
+            let temperature = document.getElementById("temperature" + (i + 1)).value;
+            let dateTime = document.getElementById("dateTime" + (i + 1)).value;
 
             var marker = new naver.maps.Marker({ // 마커 표시
                 position: new naver.maps.LatLng(document.getElementById("latitude" + (i + 1)).value, document.getElementById("longitude" + (i + 1)).value),
@@ -96,7 +107,13 @@
             });
 
             var infowindow = new naver.maps.InfoWindow({
-                content: '<div class="iw_inner"><a href="/parasol/' + id + '">' + managementNo + '</a></div>'
+                content: '<div class="iw_inner">' +
+                    '<a href="/parasol/' + id + '">' + managementNo + '</a>' +
+                    '<p>활성: ' + active + '</p>' +
+                    '<p>상태: ' + status + '</p>' +
+                    '<p>온도: ' + temperature + '</p>' +
+                    '<p>일시: ' + dateTime + '</p>' +
+                    '</div>'
             });
 
             markers.push(marker);
