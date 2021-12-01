@@ -24,7 +24,11 @@ public class ParasolController {
 
     @GetMapping
     public ModelAndView parasolList(Parasol searchParasol) {
-        logger.debug(searchParasol);
+        logger.debug("search : " + searchParasol);
+
+        if ("X".equals(searchParasol.getActive())) {
+            searchParasol.setActive(null);
+        }
 
         ModelAndView modelAndView = new ModelAndView("parasol/main");
 

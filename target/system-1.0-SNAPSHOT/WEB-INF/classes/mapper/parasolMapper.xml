@@ -45,6 +45,14 @@
             <choose>
                 <when test="managementNo != null">
                     MANAGEMENT_NO LIKE '%${managementNo}%'
+                    <if test="active != null">
+                        AND ACTIVE = #{active}
+                    </if>
+                </when>
+                <when test="managementNo == null">
+                    <if test="active != null">
+                        ACTIVE = #{active}
+                    </if>
                 </when>
             </choose>
         </where>

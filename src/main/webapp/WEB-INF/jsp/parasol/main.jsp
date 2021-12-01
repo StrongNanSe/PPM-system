@@ -37,7 +37,12 @@
         <a href="/logout" class="relative"><input type="button" value="[로그아웃]" /></a>
     </div>
     <div style="width: 220px;">
-        <form action="/parasol" +  method="GET">
+        <form action="/parasol" method="GET">
+            <select name="active">
+                <option value="X">전체</option>
+                <option value="Y">활성</option>
+                <option value="N">비활성</option>
+            </select>
             <input type="search" style="width: 70%" name="managementNo" />
             <input type="submit" value="[검색]" />
         </form>
@@ -106,18 +111,53 @@
                 map: map
             });
 
-            var infowindow = new naver.maps.InfoWindow({
-                content: '<div class="iw_inner">' +
-                    '<a href="/parasol/' + id + '">' + managementNo + '</a>' +
-                    '<p>활성: ' + active + '</p>' +
-                    '<p>상태: ' + status + '</p>' +
-                    '<p>온도: ' + temperature + '</p>' +
-                    '<p>일시: ' + dateTime + '</p>' +
-                    '</div>'
-            });
+            if (status == "펼침") {
+                var infowindow = new naver.maps.InfoWindow({
+                    content: '<div class="iw_inner">' +
+                        '<a href="/parasol/' + id + '">' + managementNo + '</a>' +
+                        '<p>활성: ' + active + '</p>' +
+                        '<p>상태: ' + status + '</p>' +
+                        '<p>온도: ' + temperature + '</p>' +
+                        '<p>일시: ' + dateTime + '</p>' +
+                        '<form action="/control/F" method="POST">' +
+                        '<input type="hidden" name="id" value="' + id + '" />' +
+                        '<input type="submit" value="접기" />' +
+                        '</form>' +
+                        '</div>'
+                });
+            } else {
+                var infowindow = new naver.maps.InfoWindow({
+                    content: '<div class="iw_inner">' +
+                        '<a href="/parasol/' + id + '">' + managementNo + '</a>' +
+                        '<p>활성: ' + active + '</p>' +
+                        '<p>상태: ' + status + '</p>' +
+                        '<p>온도: ' + temperature + '</p>' +
+                        '<p>일시: ' + dateTime + '</p>' +
+                        '<form action="/control/U" method="POST">' +
+                        '<input type="hidden" name="id" value="' + id + '" />' +
+                        '<input type="submit" value="펼치기" />' +
+                        '</form>' +
+                        '</div>'
+                });
+            }
 
             markers.push(marker);
             infowindows.push(infowindow);
+        }
+
+        function sendAction(index) {
+            console.log(index);
+
+            xmlHttpRequest = new XMLHttpRequest();
+
+            if ((document.getElementById("action" + (i + 1)).value) == 접기) {
+                xmlHttpRequest.open("POST", "/control/F", true);
+            } else {
+                xmlHttpRequest.open("POST", "/control/U", true);
+            }
+
+            xmlHttpRequest.setRequestHeader("Content-Type","application/json;charset=UTF-8");
+            xmlHttpRequest.send("id=" + document.getElementById("id" + (i + 1)).value);
         }
 
         function markerClick(index) {
