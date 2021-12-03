@@ -3,16 +3,16 @@ package kr.co.ppm.system.control;
 import kr.co.ppm.system.parasol.Parasol;
 import kr.co.ppm.system.parasol.ParasolMapper;
 import kr.co.ppm.system.parasolstatus.ParasolStatus;
-import okhttp3.*;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.Hashtable;
-import java.util.List;
 import java.util.Map;
 
 @Service
