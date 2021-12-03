@@ -22,7 +22,7 @@ public class ControlController {
     public ModelAndView sendParasolControl(Parasol parasol, @PathVariable String action) {
         logger.debug("id :" + parasol.getId() + " " + "action :" + action);
 
-        //controlService.sendControl(parasol, action);
+        controlService.sendControl(parasol, action);
 
         return new ModelAndView(new RedirectView("/parasol"));
     }

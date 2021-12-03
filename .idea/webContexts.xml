@@ -4,6 +4,7 @@
     <option name="state">
       <map>
         <entry key="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/parasol/main.jsp" value="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/parasol" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/test/testlogin.jsp" value="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/test" />
       </map>
     </option>
   </component>

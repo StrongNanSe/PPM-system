@@ -28,7 +28,7 @@ public class ControlServiceImpl implements ControlService{
 
         actionList.put(controlParasol.getId(), action);
 
-        String url = "http://" + "localhost:8080" + "/device/" + action;
+        String url = "http://" + "172.16.31.108:8080" + "/device/" + action;
 
         logger.info("this is url : " + url);
 

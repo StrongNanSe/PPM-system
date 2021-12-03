@@ -52,7 +52,7 @@ public class ParasolController {
 
     @GetMapping("/{id}")
     public ModelAndView viewParasol(Parasol parasol) {
-        ModelAndView modelAndView = new ModelAndView("parasol/view");
+        ModelAndView modelAndView = new ModelAndView("test/testview");
         modelAndView.addObject("parasol", parasolService.viewParasol(parasol));
 
         logger.debug(parasol.toString());

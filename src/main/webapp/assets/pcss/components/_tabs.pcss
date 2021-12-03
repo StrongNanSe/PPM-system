@@ -1,0 +1,42 @@
+/*-------------------------------------------
+  -- Tabs
+-------------------------------------------*/
+
+.nav-tabs {
+  border-bottom-width: 3px;
+  margin-bottom: 2rem;
+
+  h4 {
+    font-weight: normal;
+    margin-bottom: 0;
+  }
+
+  .nav-item {
+    margin-bottom: -3px;
+  }
+
+  .nav-link {
+    background-color: transparent;
+    border: none;
+    border-bottom: 3px solid transparent;
+    color: inherit;
+    opacity: .5;
+    &:first-child {
+      margin-left: 0;
+    }
+    > * {
+      padding-bottom: 0 ;
+      margin-bottom: 0;
+    }
+
+    &.active {
+      color: var(--color-black);
+      background-color: transparent;
+      border-bottom: 3px solid var(--color-primary);
+      opacity: 1;
+    }
+  }
+}
+
+
+

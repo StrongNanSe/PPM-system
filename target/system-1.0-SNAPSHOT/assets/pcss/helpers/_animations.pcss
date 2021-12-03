@@ -1,0 +1,33 @@
+/* -- Animations */
+
+@keyframes ts-anim__active-marker {
+  0% {
+    transform: rotateX(70deg) rotateZ(0deg);
+  }
+
+  100% {
+    transform: rotateX(70deg) rotateZ(360deg);
+  }
+}
+
+.ts-active-marker {
+  position: relative;
+  transform-style: preserve-3d;
+  opacity: 1 !important;
+
+  &:before {
+    animation-name: ts-anim__active-marker;
+    animation-duration: 2s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+
+    content: url(../img/marker-active.svg);
+    position: absolute;
+    width: 52px;
+    height: 52px;
+    z-index: 0;
+    left: -24px;
+    bottom: -19px;
+    opacity: .4;
+  }
+}

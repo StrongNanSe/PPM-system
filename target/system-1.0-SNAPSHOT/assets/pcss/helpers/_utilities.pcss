@@ -1,0 +1,130 @@
+/*-------------------------------------------
+  -- Utilities
+-------------------------------------------*/
+.ts-element {
+  position: relative;
+  display: block;
+}
+
+/* Social Icons */
+.ts-social-icons {
+  font-size: 120%;
+  a {
+    padding: 2px 4px;
+    color: var(--color-grey);
+  }
+}
+
+/* Overlay */
+.ts-has-overlay {
+  position: relative;
+  &:after {
+    background-color: #000;
+    content: "";
+    height: 100%;
+    left: 0;
+    opacity: .5;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: -1;
+  }
+}
+
+/* Flip x */
+.ts-flip-x {
+  transform: scaleY(-1);
+}
+/* Flip Y */
+.ts-flip-y {
+  transform: scaleX(-1);
+}
+
+.ts-full-screen {
+  min-height: 100vh;
+  width: 100%;
+}
+
+.ts-na {
+  opacity: .5;
+}
+
+.ts-has-talk-arrow {
+  position: relative;
+  &:after {
+    border-style: solid;
+    border-width: 8px 8px 0 8px;;
+    border-color: var(--color-white) transparent transparent transparent;
+    bottom: -6px;
+    content: "";
+    left: 16px;
+    position: absolute;
+  }
+}
+
+.ts-white-gradient {
+  position: relative;
+  &:after {
+    background: -moz-linear-gradient(top,  rgba(var(--color-white),0) 0%, rgba(var(--color-white),1) 100%);
+    background: -webkit-linear-gradient(top,  rgba(var(--color-white),0) 0%,rgba(var(--color-white),1) 100%);
+    background: linear-gradient(to bottom,  rgba(var(--color-white),0) 0%,rgba(var(--color-white),1) 100%);
+    content: "";
+    position: absolute;
+    bottom: 0;
+    height: 50%;
+    left: 0;
+    width: 100%;
+    z-index: -1;
+  }
+}
+.ts-black-gradient {
+  position: relative;
+  &:before {
+    background: -moz-linear-gradient(top,  rgba(0,0,0,0) 0%, rgba(0,0,0,1) 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(top,  rgba(0,0,0,0) 0%,rgba(0,0,0,1) 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom,  rgba(0,0,0,0) 0%,rgba(0,0,0,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    bottom: 0;
+    content: "";
+    height: 50%;
+    left: 0;
+    position: absolute;
+    width: 100%;
+  }
+}
+
+.ts-remove, .MultiFile-remove {
+  box-shadow: var(--bs-sm);
+  border-radius: 50%;
+  color: transparent;
+  position: absolute;
+  background-color: red;
+  width: 2rem;
+  height: 2rem;
+  line-height: 2rem;
+  text-align: center;
+  top: -1rem;
+  right: 1rem;
+  z-index: 1;
+  &:after {
+    display: block;
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 900;
+    content: "\f00d";
+    color: #fff;
+    font-size: 1rem;
+  }
+}
+
+.ts-responsive-block {
+  overflow-y: auto;
+  white-space: nowrap;
+  width: 100%;
+}
+
+.ts-h-0 {
+  height: 0 !important;
+}
+
+.ts-w-0 {
+  width: 0 !important;
+}

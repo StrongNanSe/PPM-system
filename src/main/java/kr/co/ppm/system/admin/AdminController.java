@@ -22,7 +22,11 @@ public class AdminController {
     @GetMapping("/login")
     public ModelAndView loginForm() {
         ModelAndView modelAndView = new ModelAndView("admin/loginForm");
-        modelAndView.addObject("adminMatch", adminMatch);
+
+        boolean loginCheck = adminMatch;
+        modelAndView.addObject("adminMatch", loginCheck);
+
+        adminMatch = true;
 
         return modelAndView;
     }
@@ -37,7 +41,6 @@ public class AdminController {
             if (adminMatch) {
                 session.setAttribute("login", admin);
                 modelAndView = new ModelAndView(new RedirectView("/parasol"));
-                modelAndView.addObject("admin", admin);
             }
         }
 

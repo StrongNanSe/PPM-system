@@ -1,0 +1,144 @@
+/* -- File Upload */
+
+.file-upload {
+  position: relative;
+  height: 8rem;
+  margin-bottom: 2rem;
+  margin-top: 2rem;
+  .file-upload-input {
+    border-radius: var(--br-md);
+    width: 100%;
+    border: 2px dashed rgba(0, 0, 0, .2);
+    height: 8rem;
+    text-align: center;
+    cursor: pointer;
+    position: relative;
+    display: inline-block;
+    padding: 8rem 0 0 0;
+    overflow: hidden;
+    z-index: 1;
+    transition: var(--tr);
+    &:hover {
+      border-color: rgba(0, 0, 0, .4);
+      background-color: rgba(0, 0, 0, .05);
+    }
+  }
+  span {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    line-height: 8rem;
+    width: 100%;
+    text-align: center;
+    margin: auto;
+    z-index: 0;
+    left: 0;
+    color: rgba(0, 0, 0, .5);
+    i {
+      color: var(--color-primary);
+      margin-right: 1rem;
+    }
+  }
+}
+
+.file-upload-previews {
+  > .MultiFile-label {
+    border-radius: var(--br-sm);
+    background-color: rgba(0, 0, 0, .03);
+    display: inline-block;
+    border: 2px solid rgba(0, 0, 0, .1);
+    padding: 1rem;
+    position: relative;
+    margin-right: 1rem;
+    margin-bottom: 1rem;
+  }
+  span.MultiFile-label {
+    box-shadow: var(--bs-sm);
+    position: relative;
+    text-align: center;
+    display: inline-block;
+    margin: 1rem;
+    .MultiFile-title {
+      position: absolute;
+      background-color: rgba(0, 0, 0, .4);
+      color: #fff;
+      padding: 1rem;
+      bottom: 0;
+      font-size: 12px;
+      text-align: center;
+      width: 100%;
+    }
+    .MultiFile-preview {
+      max-width: 14rem !important;
+      max-height: 7rem !important;
+    }
+  }
+
+}
+
+.file-uploaded-images {
+  .image {
+    height: 15rem;
+    display: inline-block;
+    margin-bottom: 1.8rem;
+    margin-right: 1.5rem;
+    position: relative;
+    figure {
+      box-shadow: var(--bs-sm);
+      border-radius: 50%;
+      cursor: pointer;
+      background-color: red;
+      width: 2rem;
+      height: 2rem;
+      position: absolute;
+      right: -1rem;
+      top: -1rem;
+      content: "";
+      text-align: center;
+      line-height: 1.5rem;
+      i {
+        color: #fff;
+        font-size: 1rem;
+      }
+    }
+    img {
+      height: 100%;
+    }
+  }
+}
+
+.file-uploaded-images {
+  .image {
+    box-shadow: var(--bs-sm);
+    height: 10rem;
+    display: inline-block;
+    margin-bottom: 1rem;
+    margin-right: 1rem;
+    position: relative;
+    figure {
+      box-shadow: var(--bs-sm);
+      border-radius: 50%;
+      cursor: pointer;
+      background-color: red;
+      width: 24px;
+      height: 24px;
+      position: absolute;
+      right: -12px;
+      top: -12px;
+      content: "";
+      text-align: center;
+      line-height: 22px;
+      i {
+        color: #fff;
+        font-size: 12px;
+      }
+    }
+    img {
+      height: 100%;
+    }
+  }
+}
+
+.MultiFile-remove {
+  line-height: 10px !important;
+}

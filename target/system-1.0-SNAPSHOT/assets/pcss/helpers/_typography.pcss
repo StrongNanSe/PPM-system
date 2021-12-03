@@ -1,0 +1,31 @@
+/*-------------------------------------------
+  -- Typography
+-------------------------------------------*/
+a {
+  color: var(--color-black);
+  transition: var(--tr);
+  outline: none;
+
+  &:hover {
+    color: var(--color-primary);
+    text-decoration: none;
+  }
+}
+
+button {
+  outline: none !important;
+}
+
+p {
+  line-height: 24px;
+  color: rgba(#000, .5);
+}
+
+.ts-text-small {
+  font-size: 12px !important;
+}
+
+.ts-xs-text-center {
+  text-align: center !important ?if media (max-width: 575px);
+}
+

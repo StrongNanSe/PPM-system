@@ -1,0 +1,32 @@
+/* -- FAQ */
+
+.ts-faq {
+  border-bottom: 1px solid rgba( var(--color-black), .1 );
+  margin-bottom: 32px;
+  padding-bottom: 16px;
+  padding-top: 12px;
+  margin-left: 4rem;
+  position: relative;
+
+  &:before {
+    background-color: var(--color-black);
+    border-radius: var(--br-circle);
+    box-shadow: var(--bs-sm);
+    content: "";
+    left: -4rem;
+    padding: 20px;
+    position: absolute;
+    top: 0;
+  }
+
+  &:after {
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 900;
+    content: "\f128";
+    color: #fff;
+    position: absolute;
+    z-index: 1;
+    top: 8px;
+    left: -48px;
+  }
+}

@@ -1,0 +1,16 @@
+/* -- Collapse */
+
+[data-toggle="collapse"] {
+  .ts-visible-on-collapsed {
+    display: none;
+  }
+
+  &.collapsed {
+    .ts-visible-on-collapsed {
+      display: inline-block;
+    }
+    .ts-visible-on-uncollapsed {
+      display: none;
+    }
+  }
+}

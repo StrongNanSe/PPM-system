@@ -1,0 +1,53 @@
+/* -- Pagination */
+
+.pagination {
+  margin-top: 64px;
+}
+
+.page-link {
+  background-color: transparent;
+  border: none;
+  border-radius: 0;
+  color: var(--color-black);
+  margin: 0 2px;
+  padding: 12px 16px;
+  position: relative;
+
+  &:hover {
+    background-color: var(--color-white);
+    box-shadow: var(--bs-sm);
+    color: var(--color-black);
+  }
+
+  &:after {
+    border-style: solid;
+    border-width: 8px 8px 0 0;
+    border-color: transparent transparent transparent transparent;
+    bottom: -7px;
+    content: "";
+    height: 0;
+    left: 0;
+    position: absolute;
+    width: 0;
+    transition: var(--tr);
+  }
+}
+
+.page-item {
+  &:first-child, &:last-child {
+    .page-link {
+      border-radius: 0;
+    }
+  }
+  &.active {
+    .page-link {
+      background-color: var(--color-primary);
+      box-shadow: var(--bs-sm);
+
+      &:after {
+        border-color: var(--color-primary) transparent transparent transparent;
+      }
+
+    }
+  }
+}

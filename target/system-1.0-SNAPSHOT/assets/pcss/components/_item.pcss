@@ -1,0 +1,317 @@
+/* -- Item */
+
+.ts-item {
+  &.ts-item__lg {
+    .card-img {
+      height: 18rem;
+      h4 {
+        font-size: 20px;
+      }
+    }
+    .card-body {
+
+    }
+
+    .ts-description-lists {
+      dt {
+        font-size: 14px;
+      }
+      dd {
+        font-size: 14px;
+      }
+    }
+
+    .ts-item__info-badge {
+      font-size: 16px;
+      font-weight: 600;
+    }
+  }
+
+  > .badge {
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: 24px;
+    z-index: 2;
+  }
+
+  .card-img {
+    &:before {
+      /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#000000+0,000000+100&0+0,1+100 */
+      background: -moz-linear-gradient(top,  rgba(0,0,0,0) 0%, rgba(0,0,0,1) 100%); /* FF3.6-15 */
+      background: -webkit-linear-gradient(top,  rgba(0,0,0,0) 0%,rgba(0,0,0,1) 100%); /* Chrome10-25,Safari5.1-6 */
+      background: linear-gradient(to bottom,  rgba(0,0,0,0) 0%,rgba(0,0,0,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+      bottom: 0;
+      content: "";
+      height: 50%;
+      left: 0;
+      position: absolute;
+      width: 100%;
+    }
+    &:after {
+      border-style: solid;
+      border-width: 8px 8px 0 0;
+      border-color: var(--color-black) transparent transparent transparent;
+      bottom: -7px;
+      content: "";
+      height: 0;
+      left: 0;
+      position: absolute;
+      width: 0;
+    }
+  }
+
+  .ts-item__info {
+    bottom: 8px;
+    border-top-left-radius: var(--br-md);
+    border-top-right-radius: var(--br-md);
+    color: var(--color-white);
+    margin-bottom: 0;
+    position: absolute;
+    padding: 20px;
+    overflow: hidden;
+    transition: var(--tr);
+    z-index: 1;
+
+    h4{
+      margin-bottom: 0;
+      transition-delay: .2s;
+    }
+    aside {
+      font-size: 13px;
+      transition-delay: .1s;
+      opacity: .6;
+    }
+  }
+
+  .card-body {
+    background-color: var(--color-white);
+    padding: 24px 16px 16px 20px;
+  }
+
+  .ts-description-lists {
+    dl {
+      margin-right: 1rem;
+      margin-bottom: 0;
+    }
+    dt {
+      font-size: 12px;
+    }
+    dd {
+      font-size: 13px;
+    }
+  }
+}
+
+.ts-compare-items-table {
+  display: block;
+  overflow-x: auto;
+  padding-top: 24px;
+  width: 100%;
+
+  .row {
+    margin: 0;
+    flex-wrap: nowrap;
+
+    &:last-child {
+      border: none;
+      .col {
+        border: none;
+      }
+    }
+
+    .col {
+      border-bottom: 1px solid rgba(0,0,0,.1);
+      padding-top: 8px;
+      padding-bottom: 8px;
+      min-width: 14rem;
+
+      &:first-child {
+        padding-left: 0;
+      }
+      &:last-child {
+        padding-right: 0;
+      }
+      &:not(.ts-row-title){
+        text-align: center;
+      }
+    }
+  }
+
+  .card {
+    height: 14rem;
+    .card-img {
+      &:after {
+        display: none;
+      }
+    }
+  }
+
+  h3 {
+    margin-bottom: 2rem;
+  }
+  .ts-row-title {
+    font-weight: bold;
+    i {
+      opacity: .5;
+      margin-right: 8px;
+    }
+  }
+
+  .ts-available, .ts-not-available {
+    &:after {
+      font-family: "Font Awesome\ 5 Free";
+      font-weight: 900;
+      font-style: normal;
+    }
+  }
+  .ts-available {
+    &:after {
+      color: var(--color-primary);
+      content: "\f00c";
+    }
+  }
+  .ts-not-available {
+    &:after {
+      content: "\f00d";
+      opacity: .3;
+    }
+  }
+}
+
+@-moz-document url-prefix() {
+  .ts-item {
+    transform: rotate(0.002deg);
+    transform-style: preserve-3d;
+  }
+}
+
+.ts-item__list {
+  width: 100%;
+
+  .ts-item__info {
+    bottom: inherit;
+    top: -5rem;
+    padding: 0;
+  }
+
+  .ts-item__info-badge {
+    bottom: inherit;
+    top: -1rem;
+  }
+
+}
+
+@media (min-width: 576px) {
+  .ts-item__list {
+    .card-img {
+      border-top-right-radius: 0;
+      border-bottom-left-radius: var(--br-sm);
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 14rem;
+      &:after {
+        display: none;
+      }
+      &:before {
+        border-bottom-left-radius: var(--br-sm);
+      }
+    }
+
+    .card-body, .card-footer {
+      padding-left: 15rem;
+    }
+
+    .ts-item__info {
+      top: inherit;
+      color: var(--color-black);
+      margin-bottom: 1rem;
+      padding: 0;
+      position: relative;
+      transform: translateY(0);
+    }
+
+    .ts-ribbon {
+      right: inherit;
+      left: 11rem;
+    }
+
+    .ts-item__info-badge {
+      bottom: -16px;
+      font-size: 14px;
+      left: 24px;
+      top: inherit;
+    }
+
+    &.ts-item__compact{
+
+      .card-img {
+        width: 11rem;
+      }
+
+      .card-body {
+        padding: 8px 8px 0 8px;
+      }
+
+      .card-body, .card-footer {
+        padding-left: 12rem;
+      }
+
+      .ts-ribbon {
+        left: 8rem;
+      }
+
+      .ts-item__info-badge {
+        font-size: 12px;
+      }
+    }
+  }
+}
+
+
+.ts-item__company {
+  .card-img {
+    align-items: center;
+    background-color: var(--color-white);
+    display: flex;
+    justify-content: center;
+
+    &:before, &:after {
+      display: none;
+    }
+  }
+
+  .card-body {
+    background-color: var(--color-light);
+    padding-bottom: 0;
+  }
+
+  .card-footer {
+    border: none;
+  }
+
+  .ts-item__info {
+    position: relative;
+    color: inherit;
+    margin-bottom: 1rem;
+    top: inherit;
+  }
+
+  .ts-description-list1, .ts-company-info {
+    background-color: var(--color-white);
+    padding: 16px 16px 8px 16px;
+    border-radius: var(--br-sm);
+    display: flex ?if media (min-width: 576px);
+    justify-content: space-between;
+    font-size: 14px;
+
+    .ts-company-contact {
+      i {
+        margin-right: 1rem;
+        opacity: .5;
+      }
+    }
+  }
+}

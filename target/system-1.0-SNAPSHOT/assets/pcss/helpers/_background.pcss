@@ -1,0 +1,72 @@
+/*-------------------------------------------
+  -- Background
+-------------------------------------------*/
+[data-bg-image] {
+  background-size: cover;
+  background-position: 50%;
+}
+
+.ts-background {
+  bottom: 0;
+  left: 0;
+  height: 100%;
+  overflow: hidden;
+  position: absolute;
+  width: 100%;
+  z-index: -2;
+
+  .ts-background {
+    height: 100%;
+    width: 100%;
+  }
+}
+
+
+.ts-background-repeat {
+  background-repeat: repeat;
+  background-size: inherit;
+  .ts-background-image {
+    background-repeat: repeat;
+    background-size: inherit;
+  }
+}
+
+.ts-background-image, .ts-img-into-bg {
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: 50%;
+  height: 100%;
+  overflow: hidden;
+  width: 100%;
+
+  img {
+    display: none;
+  }
+}
+
+
+header {
+  opacity: 1;
+}
+.ts-bokeh-background {
+  filter: blur(30px);
+  filter: blur(40px) ?if media (min-width: 576px);
+
+  top: -1rem;
+  top: -5rem ?if media (min-width: 576px) and (max-width: 767px);
+  top: -7rem ?if media (min-width: 768px) and (max-width: 991px);
+  top: -10rem ?if media (min-width: 992px);
+
+  position:  absolute;
+  display:  block;
+  left: 0;
+  width: 100%;
+  height: 12rem;
+  opacity: .6;
+  overflow: hidden;
+  z-index: -1;
+
+  #ts-canvas {
+    width: 100%;
+  }
+}

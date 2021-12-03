@@ -1,0 +1,67 @@
+/* -- Ribbon */
+
+.ts-ribbon {
+  border: 16px solid var(--color-primary);
+  border-top: 0 solid;
+  border-bottom: 16px solid rgba(0,0,0,0);
+  color: var(--color-white);
+  line-height: 40px;
+  position: absolute;
+  right: 16px;
+  top: -4px;
+  z-index: 2;
+  width: 0;
+
+  i {
+    transform: translateX(-50%);
+  }
+}
+
+.ts-ribbon-corner {
+  height: 120px;
+  position: absolute;
+  top: -6px;
+  overflow: hidden;
+  right: -6px;
+  width: 120px;
+
+  &:before, &:after {
+    width: 0;
+    height: 0;
+    border-style: solid;
+    content: "";
+    position: absolute;
+  }
+  &:before {
+    border-width: 6px 0 0 6px;
+    border-color: transparent transparent transparent var(--color-black);
+    left: 23px;
+    top: 0;
+  }
+  &:after {
+    border-width: 6px 0 0 6px;
+    border-color: transparent transparent transparent var(--color-black);
+    right: 0;
+    bottom: 23px;
+  }
+
+  span {
+    background-color: var(--color-primary);
+    backface-visibility: hidden;
+    color: var(--color-white);
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    text-align: center;
+    transform: rotate(45deg);
+    transform-origin: center;
+    transform-style: preserve-3d;
+    padding: 8px 32px;
+    position: absolute;
+    z-index: 2;
+    width: 200%;
+    display: block;
+    top: 20px;
+    right: -80px;
+  }
+}
