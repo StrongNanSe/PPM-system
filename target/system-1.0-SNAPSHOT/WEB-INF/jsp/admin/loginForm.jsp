@@ -73,7 +73,7 @@
 												<!--Remember checkbox-->
 												<div class="custom-control custom-checkbox mb-0">
 													<c:if test="${adminMatch eq false}">
-														<p style="font-size: 1em; color:red">아이디 또는 비밀번호가 일치 하지 않습니다.</p>
+														<p style="font-size: 1em" class="text-danger">아이디 또는 비밀번호가 일치 하지 않습니다.</p>
 													</c:if>
 												</div>
 												<!--Submit button-->

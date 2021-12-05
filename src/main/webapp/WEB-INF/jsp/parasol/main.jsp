@@ -54,9 +54,9 @@
                                 <i class="fa fa-chevron-down ts-text-color-primary ts-visible-on-collapsed"></i>
                             </button>
                         </div>
-                        <!--Form-->
+                        <!--검색-->
                         <div id="form-collapse" class="collapse ts-xs-hide-collapse show">
-                            <form action="/parasol" method="GET" class="ts-form mb-0 d-flex flex-column flex-sm-row py-2 pl-2 pr-3">
+                            <div class="ts-form mb-0 d-flex flex-column flex-sm-row py-2 pl-2 pr-3">
                                 <!--Keyword-->
                                 <div class="form-group m-1 w-100">
                                     <input type="text" class="form-control" id="keyword" name="managementNo" placeholder="관리번호">
@@ -71,9 +71,9 @@
                                 </div>
                                 <!--Submit button-->
                                 <div class="form-group m-1 ml-auto">
-                                    <button type="submit" class="btn btn-primary" id="search-btn">검색</button>
+                                    <button type="button" class="btn btn-primary" id="search-btn">검색</button>
                                 </div>
-                            </form>
+                            </div>
                         </div>
                         <!--end Form-->
                     </section>
@@ -85,33 +85,8 @@
                         =====================================================================================================-->
                         <div class="ts-results__vertical ts-results__vertical-list ts-shadow__sm scrollbar-inner bg-white">
                             <!--Results wrapper-->
-                            <section id="ts-results" da >
-                                <div class="ts-results-wrapper">
-                                    <c:forEach items="${markList}" var="mark" varStatus="index">
-                                        <div class="ts-result-link " data-ts-id="6" data-ts-ln="5">
-                                            <a href="javascript:void(0);" onclick="moveMap(${mark.latitude}, ${mark.longitude})" class="card ts-item ts-card ts-result">
-                                                <div class="card-body">
-                                                    <figure class="ts-item__info">
-                                                        <h4>${mark.managementNo}</h4>
-                                                        <aside>
-                                                            <i class="fa fa-map-marker mr-2"></i>
-                                                            ${mark.active}
-                                                        </aside>
-                                                    </figure>
-                                                </div>
-                                            </a>
-                                            <input type="hidden" id="id${index.count}" value="${mark.id}" />
-                                            <input type="hidden" id="managementNo${index.count}" value="${mark.managementNo}" />
-                                            <input type="hidden" id="latitude${index.count}" value="${mark.latitude}" />
-                                            <input type="hidden" id="longitude${index.count}" value="${mark.longitude}" />
-                                            <input type="hidden" id="agentIpAdress${index.count}" value="${mark.agentIpAddress}" />
-                                            <input type="hidden" id="active${index.count}" value="${mark.active}" />
-                                            <input type="hidden" id="status${index.count}" value="${mark.status}" />
-                                            <input type="hidden" id="temperature${index.count}" value="${mark.temperature}" />
-                                            <input type="hidden" id="dateTime${index.count}" value="${mark.dateTime}" />
-                                        </div>
-                                    </c:forEach>
-                                </div>
+                            <section id="ts-results">
+                                <div id="drawResult"  class="ts-results-wrapper"></div>
                             </section>
                         </div>
                         <!--end ts-results-vertical-->
@@ -131,8 +106,12 @@
         </div>
         <!--end page-->
         <script>
+            search();
+
+            let dataToJson;
+
             let mapOptions = {
-                zoom: 10
+                zoom: 9
             };
 
             let map = new naver.maps.Map('map', mapOptions);
@@ -140,95 +119,202 @@
             let markers = [];
             let infowindows = [];
 
-            for (var i = 0; i < ${markList.size()}; i++) {
+            function search() {
+                xmlHttpRequest = new XMLHttpRequest();
+                xmlHttpRequest.open("GET", "/parasol?managementNo=" + document.getElementById("keyword").value + "&active=" + document.getElementById("type").value, true);
+                xmlHttpRequest.setRequestHeader("Content-Type","application/json;charset=UTF-8");
 
-                let id = document.getElementById("id" + (i + 1)).value;
-                let managementNo = document.getElementById("managementNo" + (i + 1)).value;
-                let active = document.getElementById("active" + (i + 1)).value;
-                let status = document.getElementById("status" + (i + 1)).value;
-                let temperature = document.getElementById("temperature" + (i + 1)).value;
-                let dateTime = document.getElementById("dateTime" + (i + 1)).value;
+                xmlHttpRequest.send();
 
-                var HOME_PATH = window.HOME_PATH || '.';
-
-                var marker = new naver.maps.Marker({
-                    position: new naver.maps.LatLng(document.getElementById("latitude" + (i + 1)).value, document.getElementById("longitude" + (i + 1)).value),
-                    map: map
-                });
-
-                if (status == "펼침") {
-                    var contentString = [
-                        '<div class="iw_inner">' +
-                        '    <div margin: auto"><a class="nav-link" href="/parasol/' + id + '">' + managementNo + '</a></div>' +
-                        '    <hr>' +
-                        '    <p>활성 : ' + active + '</p>' +
-                        '    <p>상태 : ' + status + '</p>' +
-                        '    <p>온도 : ' + temperature + '</p>' +
-                        '    <p>일시 : ' + dateTime + '</p>' +
-                        '    <hr>' +
-                        '    <div style="margin: auto">' +
-                        '       <form style="width: fit-content; margin: auto" action="/control/F" method="POST">' +
-                        '           <input type="hidden" name="id" value="' + id + '" />' +
-                        '           <button type="submit" class="btn btn-primary ">접기</button>' +
-                        '       </form>' +
-                        '    </div>' +
-                        '    <br>' +
-                        '</div>'
-                    ].join('');
-                } else {
-                    var contentString = [
-                        '<div class="iw_inner">' +
-                        '    <div margin: auto"><a class="nav-link" href="/parasol/' + id + '">' + managementNo + '</a></div>' +
-                        '    <hr>' +
-                        '    <p>활성 : ' + active + '</p>' +
-                        '    <p>상태 : ' + status + '</p>' +
-                        '    <p>온도 : ' + temperature + '</p>' +
-                        '    <p>일시 : ' + dateTime + '</p>' +
-                        '    <hr>' +
-                        '    <div style="margin: auto">' +
-                        '       <form style="width: fit-content; margin: auto" action="/control/U" method="POST">' +
-                        '           <input type="hidden" name="id" value="' + id + '" />' +
-                        '           <button type="submit" class="btn btn-primary">펼치기</button>' +
-                        '       </form>' +
-                        '    </div>' +
-                        '    <br>' +
-                        '</div>'
-                    ].join('');
-                }
-
-                var infowindow = new naver.maps.InfoWindow({
-                    content: contentString,
-                    maxWidth: 200,
-                    backgroundColor: "rgb(214,250,223)",
-                    borderColor: "rgb(145,217,239)",
-                    borderWidth: 3,
-                    anchorSize: new naver.maps.Size(10, 10),
-                    anchorSkew: true,
-                    anchorColor: "rgb(214,250,223)",
-                    pixelOffset: new naver.maps.Point(20, -20)
-                });
-
-                markers.push(marker);
-                infowindows.push(infowindow);
+                xmlHttpRequest.onreadystatechange = getData;
             }
 
-            function sendAction(index) {
-                console.log(index);
+            function getData() {
+                if (xmlHttpRequest.readyState == 4 && xmlHttpRequest.status == 200) {
+                    dataToJson = JSON.parse(xmlHttpRequest.responseText);
+                }
+
+                if (markers.length > 0) {
+                    for (var i = 0; i < markers.length; i ++) {
+                        markers[i].setMap(null);
+                        infowindows[i].setMap(null);
+                    }
+                    infowindows = [];
+                    markers = [];
+                }
+
+                if (dataToJson != null) {
+                    if (dataToJson.length > 0) {
+                        var script = "";
+
+                        for (var i = 0; i < dataToJson.length; i++) {
+                            let id = dataToJson[i].id;
+                            let active = dataToJson[i].active;
+                            let managementNo = dataToJson[i].managementNo;
+                            let status = dataToJson[i].status;
+                            let temperature = dataToJson[i].temperature;
+                            let dateTime = dataToJson[i].dateTime;
+                            let latitude = dataToJson[i].latitude;
+                            let longitude = dataToJson[i].longitude;
+                            let activeKr = "";
+                            let action;
+                            let color;
+
+                            if (status == "접힘" || status == null) {
+                                action = "U";
+                            } else {
+                                action = "F";
+                            }
+
+                            if (active == "Y") {
+                                activeKr = "활성"
+                            } else {
+                                activeKr = "비활성"
+                                color = "text-danger";
+                            }
+
+                            script += '<div class="ts-result-link card ts-item ts-card ts-result" data-ts-id="6" data-ts-ln="5">'
+                                    + '    <a href="javascript:void(0);" onclick="moveMap(' + latitude + ', ' + longitude + ', ' + i + ')">'
+                                    + '        <input type="hidden" id="id' + i + '" value="' + id + '" />'
+                                    + '        <input type="hidden" id="active' + i + '" value="' + active + '" />'
+                                    + '        <input type="hidden" id="managementNo' + i + '" value="' + managementNo + '" />'
+                                    + '        <input type="hidden" id="status' + i + '" value="' + status + '" />'
+                                    + '        <input type="hidden" id="temperature' + i + '" value="' + temperature + '" />'
+                                    + '        <input type="hidden" id="dateTime' + i + '" value="' + dateTime + '" />'
+                                    + '        <input type="hidden" id="latitude' + i + '" value="' + latitude + '" />'
+                                    + '        <input type="hidden" id="longitude' + i + '" value="' + longitude + '" />'
+                                    + '        <input type="hidden" id="activeKr' + i + '" value="' + activeKr + '" />'
+                                    + '        <input type="hidden" id="action' + i + '" value="' + action + '" />'
+                                    + '        <div class="card-body">'
+                                    + '            <figure class="ts-item__info">'
+                                    + '                <h4>' + managementNo + '</h4>'
+                                    + '                <aside class="' + color + '">'
+                                    + '                    <i class="fa fa-map-marker mr-2"></i>'
+                                    +                      activeKr
+                                    + '                </aside>'
+                                    + '            </figure>'
+                                    + '        </div>'
+                                    + '    </a>'
+                                    + '</div>';
+                        }
+                        document.getElementById("drawResult").innerHTML = script;
+
+                        for (var i = 0; i < dataToJson.length; i++) {
+                            let statusKr;
+                            let color;
+
+                            if (document.getElementById("active" + i).value == "N") {
+                                color = "rgb(234,9,9)";
+                            } else {
+                                color = "rgb(5,148,252)";
+                            }
+
+                            if (document.getElementById("status" + i).value == "펼침") {
+                                statusKr = "접기";
+                            } else {
+                                statusKr = "펼치기";
+                            }
+
+                            var marker = new naver.maps.Marker({
+                                position: new naver.maps.LatLng(document.getElementById("latitude" + i).value, document.getElementById("longitude" + i).value),
+                                map: map,
+                                animation: naver.maps.Animation.DROP
+                            });
+
+                            var contentString = [
+                                  '<section id="basic-information" style="margin: auto; width: fit-content" class="mb-1 pl-0">'
+                                + '    <div class="mb-2 card ts-item ts-card ts-result">'
+                                + '        <a style="text-align: center; width: 100%;" href="/parasol/' + document.getElementById("id" + i).value + '">' + document.getElementById("managementNo" + i).value + '</a>'
+                                + '    </div>'
+                                + '    <div style="text-align: center; margin: auto" class="row">'
+                                + '        <div class="col-sm-4">'
+                                + '            <label>활성</label>'
+                                + '            <p>' + document.getElementById("active" + i).value + '</p>'
+                                + '        </div>'
+                                + '        <div class="col-sm-4">'
+                                + '            <label>상태</label>'
+                                + '            <p>' + document.getElementById("status" + i).value + '</p>'
+                                + '        </div>'
+                                + '        <div class="col-sm-4">'
+                                + '            <label>온도</label>'
+                                + '            <p>' + document.getElementById("temperature" + i).value + '</p>'
+                                + '        </div>'
+                                + '        <div class="col-sm-12 mb-0 mb-sm-0 btn-sm d-block d-sm-inline-block">'
+                                + '            <label>일시</label>'
+                                + '            <p>' + document.getElementById("dateTime" + i).value + '</p>'
+                                + '        </div>'
+                                + '        <div class="col-sm-12 mb-1">'
+                                + '           <a href="javascript:void(0);" onclick="sendAction(document.getElementById(`id' + i + '`).value, document.getElementById(`action' + i + '`).value);" class="btn btn-primary">' + statusKr + '</a>'
+                                + '        </div>'
+                                + '    </div>'
+                                + '</section>'
+                            ].join('');
+
+                            var infowindow = new naver.maps.InfoWindow({
+                                content: contentString,
+                                maxWidth: 200,
+                                backgroundColor: "rgb(214,250,223)",
+                                borderColor: color,
+                                borderWidth: 3,
+                                anchorSize: new naver.maps.Size(10, 10),
+                                anchorSkew: true,
+                                anchorColor: "rgb(214,250,223)",
+                                pixelOffset: new naver.maps.Point(20, -20)
+                            });
+
+                            naver.maps.Event.addListener(marker, 'click', markerClick(i));
+
+                            markers.push(marker);
+                            infowindows.push(infowindow);
+                        }
+                    } else {
+                        document.getElementById("drawResult").innerHTML = '<div class="ts-result-link " data-ts-id="6" data-ts-ln="5">'
+                                                                        + '    <p class="card ts-item ts-card ts-result">'
+                                                                        + '        <div class="card-body">'
+                                                                        + '            <figure class="ts-item__info">'
+                                                                        + '                <h4>검색 결과가 없습니다</h4>'
+                                                                        + '            </figure>'
+                                                                        + '        </div>'
+                                                                        + '    </p>'
+                                                                        + '</div>';
+                    }
+                }
+            }
+
+            function sendAction(sendId, action) {
+                console.log(sendId);
 
                 xmlHttpRequest = new XMLHttpRequest();
 
-                if ((document.getElementById("action" + (i + 1)).value) == 접기) {
+                if (action == "F") {
                     xmlHttpRequest.open("POST", "/control/F", true);
                 } else {
                     xmlHttpRequest.open("POST", "/control/U", true);
                 }
-
                 xmlHttpRequest.setRequestHeader("Content-Type","application/json;charset=UTF-8");
-                xmlHttpRequest.send("id=" + document.getElementById("id" + (i + 1)).value);
+
+                xmlHttpRequest.send('{"id" : "' + sendId + '"}');
+
+                xmlHttpRequest.onreadystatechange = responseBysendAction;
+            }
+
+            function responseBysendAction() {
+                if (xmlHttpRequest.readyState == 4 && xmlHttpRequest.status == 200) {
+                    console.log("Good!!");
+                }
             }
 
             function markerClick(index) {
-                return function(e) {
+                return function (e) {
+                    if (markers[index].getAnimation() != null) {
+                        markers[index].setAnimation(null);
+                    } else {
+                        for (var i = 0; i < markers.length; i++) {
+                            markers[i].setAnimation(null);
+                        }
+                        markers[index].setAnimation(naver.maps.Animation.BOUNCE);
+                    }
+
                     if (infowindows[index].getMap()) {
                         infowindows[index].close();
                     } else {
@@ -237,14 +323,22 @@
                 }
             }
 
-            for (var i = 0; i < markers.length; i++) {
-                naver.maps.Event.addListener(markers[i], 'click', markerClick(i));
-            }
-
-            function moveMap(latitude, longitude) {
+            function moveMap(latitude, longitude, index) {
                 map.setCenter(new naver.maps.LatLng(latitude, longitude));
                 map.setZoom(18);
+
+                for (var i = 0; i < markers.length; i++) {
+                    if (markers[i].getAnimation() != null) {
+                        markers[i].setAnimation(null);
+                    }
+                }
+
+                markers[index].setAnimation(naver.maps.Animation.BOUNCE);
+                infowindows[index].open(map, markers[index]);
             }
+
+            document.getElementById("search-btn").addEventListener("click", search, false);
+            document.getElementById("")
         </script>
 
         <%@ include file="/WEB-INF/jsp/include/bottom.jsp" %>

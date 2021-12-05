@@ -23,14 +23,17 @@ public class ParasolController {
     private Logger logger = LogManager.getLogger(ParasolController.class);
 
     @GetMapping
-    public ModelAndView parasolList(Parasol searchParasol) {
+    public ModelAndView parasolList() {
+        return new ModelAndView("parasol/main");
+    }
+
+    @GetMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+    public List<Mark> parasolList(Parasol searchParasol) {
         logger.debug("search : " + searchParasol);
 
         if ("X".equals(searchParasol.getActive())) {
             searchParasol.setActive(null);
         }
-
-        ModelAndView modelAndView = new ModelAndView("parasol/main");
 
         List<Mark> markList = new ArrayList<Mark>();
         List<Parasol> parasolList = parasolService.parasolList(searchParasol);
@@ -38,24 +41,20 @@ public class ParasolController {
         for (Parasol parasol : parasolList) {
             ParasolStatus parasolStatus = parasolStatusService.viewParasolStatus(parasol);
 
-            logger.debug(parasolStatus);
-
             markList.add(new Mark(parasol.getId(), parasol.getManagementNo(), parasol.getLatitude()
                     , parasol.getLongitude(), parasol.getAgentIpAddress(), parasol.getActive()
                     , parasolStatus.getStatus(), parasolStatus.getTemperature(), parasolStatus.getDateTime()));
         }
 
-        modelAndView.addObject("markList", markList);
-
-        return modelAndView;
+        return markList;
     }
 
     @GetMapping("/{id}")
     public ModelAndView viewParasol(Parasol parasol) {
-        ModelAndView modelAndView = new ModelAndView("test/testview");
+        ModelAndView modelAndView = new ModelAndView("parasol/view");
         modelAndView.addObject("parasol", parasolService.viewParasol(parasol));
 
-        logger.debug(parasol.toString());
+        logger.debug("viewParasol --> " + parasol.toString());
 
         return modelAndView;
     }

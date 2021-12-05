@@ -13,6 +13,16 @@
         <result column="DATE_TIME" property="dateTime" />
     </resultMap>
 
+    <select id="selectPageCount"
+            parameterType="kr.co.ppm.system.parasol.Parasol"
+            resultType="int">
+        SELECT CEIL(COUNT(NO) / 10) AS PAGE
+        FROM PARASOL_STATUS
+        <where>
+            PARASOL_ID = #{id}
+        </where>
+    </select>
+
     <insert id="insert"
             parameterType="kr.co.ppm.system.parasolstatus.ParasolStatus">
         INSERT INTO PARASOL_STATUS

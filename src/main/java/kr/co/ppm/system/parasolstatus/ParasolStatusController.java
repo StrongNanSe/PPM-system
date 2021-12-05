@@ -20,8 +20,22 @@ public class ParasolStatusController {
 
     @GetMapping("/{id}")
     public ModelAndView parasolStatusList(Parasol parasol) {
+        logger.debug("parasolStatusList --> " + parasol);
+
         ModelAndView modelAndView = new ModelAndView("parasolstatus/statuslist");
         modelAndView.addObject("parasolStatusList", parasolStatusService.parasolStatusList(parasol));
+        modelAndView.addObject("parasol", parasol);
+
+        return modelAndView;
+    }
+
+    @GetMapping("/test/{id}")
+    public ModelAndView testParasolStatusList(Parasol parasol) {
+        logger.debug("parasolStatusList --> " + parasol);
+
+        ModelAndView modelAndView = new ModelAndView("parasolstatus/statuslist");
+        modelAndView.addObject("parasolStatusList", parasolStatusService.parasolStatusList(parasol));
+        modelAndView.addObject("parasol", parasol);
 
         return modelAndView;
     }
@@ -37,7 +51,10 @@ public class ParasolStatusController {
 
         String code = parasolStatusService.receiveParasolStatus(parasolStatus);
 
+        parasolStatus.setStatus(receiveStatus);
+
         String sendAction = controlService.analysisStatus(parasolStatus);
+
         if (sendAction != null) {
             controlService.sendControl(new Parasol(parasolStatus.getParasolId()), sendAction);
         }

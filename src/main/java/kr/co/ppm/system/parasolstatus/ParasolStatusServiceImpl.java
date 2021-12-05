@@ -16,6 +16,11 @@ public class ParasolStatusServiceImpl implements ParasolStatusService {
     private ParasolMapper parasolMapper;
 
     @Override
+    public int getPageCount(Parasol parasol) {
+        return parasolStatusMapper.selectPageCount(parasol);
+    }
+
+    @Override
     public List<ParasolStatus> parasolStatusList(Parasol parasol) {
         return parasolStatusMapper.selectAll(parasol) != null
                 ? parasolStatusMapper.selectAll(parasol)

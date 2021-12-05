@@ -44,26 +44,36 @@
                         <div class="ts-compare-items-table">
                             <!--DETAILS
                             =================================================================================================-->
-                            <section id="details">
-                                <div class="row">
-                                    <div class="col ts-row-title">NO</div>
-                                    <div class="col ts-row-title">상태</div>
-                                    <div class="col ts-row-title">온도</div>
-                                    <div class="col ts-row-title">일시</div>
-                                </div>
-                                <c:forEach items="${parasolStatusList}" var="parasolStatus" varStatus="index">
-                                    <div class="row">
-                                        <div class="col text-left">${parasolStatusList.size() - index.index}</div>
-                                        <div class="col text-left">${parasolStatus.status}</div>
-                                        <div class="col text-left">${parasolStatus.temperature}</div>
-                                        <div class="col text-left">${parasolStatus.dateTime}</div>
-                                    </div>
-                                </c:forEach>
-                            </section>
+                            <section id="details"></section>
                         </div>
                         <!--end ts-compare-items-table-->
                     </div>
                     <!--end container-->
+                </section>
+                <!--PAGINATION
+                =========================================================================================================-->
+                <section id="pagination">
+                    <div class="container">
+                        <!--Pagination-->
+                        <nav aria-label="Page navigation">
+                            <ul class="pagination ts-center__horizontal">
+                                <c:forEach begin="1" end="${pageCount}" step="1" varStatus="page">
+                                    <c:choose>
+                                        <c:when test="${page.count = 2}">
+                                            <li class="page-item active">
+                                                <a class="page-link" href="#">${page.count}</a>
+                                            </li>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <li class="page-item">
+                                                <a class="page-link" href="#">${page.count}</a>
+                                            </li>
+                                        </c:otherwise>
+                                    </c:choose>
+                                </c:forEach>
+                            </ul>
+                        </nav>
+                    </div>
                 </section>
             </main>
             <!--end #ts-main-->
