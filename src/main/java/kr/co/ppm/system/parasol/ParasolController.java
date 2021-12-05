@@ -61,6 +61,7 @@ public class ParasolController {
 
     @PostMapping
     public ModelAndView editParasol(Parasol parasol) {
+
         ModelAndView modelAndView  = new ModelAndView(new RedirectView("/parasol/" + parasol.getId()));
         parasolService.editParasol(parasol);
 
@@ -71,6 +72,7 @@ public class ParasolController {
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public String receiveParasol(@RequestBody Parasol parasol) {
+
         return parasolService.receiveParasol(parasol);
     }
 }

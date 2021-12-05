@@ -1,5 +1,6 @@
 package kr.co.ppm.system.control;
 
+
 import kr.co.ppm.system.parasol.Parasol;
 import kr.co.ppm.system.parasol.ParasolMapper;
 import kr.co.ppm.system.parasolstatus.ParasolStatus;
@@ -33,37 +34,37 @@ public class ControlServiceImpl implements ControlService{
         logger.info("this is url : " + url);
 
         try{
-            String response = sendGetType(url);
-            logger.info(response);
+            String responseCode = null;
+            OkHttpClient client = new OkHttpClient();
+
+            Request request = new Request.Builder()
+                    .url(url)
+                    .get()
+                    .build();
+
+            try (Response response = client.newCall(request).execute()) {
+                responseCode = response.body().string();
+            }
+
+            logger.info(responseCode);
         } catch (Exception e) {
             // TODO 오류처리
-            logger.info(e.toString());
+            logger.info("Exception Occurred in method sendControl");
         }
     }
 
     @Override
     public String analysisStatus(ParasolStatus parasolStatus) {
         String receiveId = parasolStatus.getParasolId();
-        String sendAction = actionList.get(receiveId);
 
         if (actionList.containsKey(receiveId)) {
+            String sendAction = actionList.get(receiveId);
+
             if (!(sendAction.equals(parasolStatus.getStatus()))) {
                 return sendAction;
             }
         }
 
         return null;
-    }
-
-    private String sendGetType(String url) throws IOException {
-        OkHttpClient client = new OkHttpClient();
-        //RequestBody requestBody = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), postBody);
-        Request request = new Request.Builder()
-                .url(url)
-                .build();
-
-        try (Response response = client.newCall(request).execute()) {
-            return response.body().string();
-        }
     }
 }

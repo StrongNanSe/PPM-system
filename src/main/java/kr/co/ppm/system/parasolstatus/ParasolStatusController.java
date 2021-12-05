@@ -43,6 +43,7 @@ public class ParasolStatusController {
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public String receiveParasolStatus(@RequestBody ParasolStatus parasolStatus) {
         String receiveStatus = parasolStatus.getStatus();
+
         if ("U".equals(receiveStatus)) {
             parasolStatus.setStatus("펼침");
         } else if ("F".equals(receiveStatus)) {

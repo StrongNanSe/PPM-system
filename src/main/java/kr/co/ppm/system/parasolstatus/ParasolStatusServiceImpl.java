@@ -40,7 +40,6 @@ public class ParasolStatusServiceImpl implements ParasolStatusService {
             parasolStatusMapper.insert(parasolStatus);
         }
 
-
         String code = "{" +
                 "    \"code\": \"200\"," +
                 "    \"error\": {" +
