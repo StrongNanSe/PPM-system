@@ -7,8 +7,8 @@ import java.util.List;
 
 @Mapper
 public interface ParasolStatusMapper {
-    int selectPageCount(Parasol parasol);
     void insert(ParasolStatus parasolStatus);
     List<ParasolStatus> selectAll(Parasol parasol);
+    List<ParasolStatus> selectAllByRownum(Parasol parasol);
     ParasolStatus selectByParasolId(Parasol parasol);
 }

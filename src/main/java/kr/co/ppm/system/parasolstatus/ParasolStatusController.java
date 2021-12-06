@@ -9,6 +9,8 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/status")
 public class ParasolStatusController {
@@ -19,7 +21,7 @@ public class ParasolStatusController {
     private Logger logger = LogManager.getLogger(ParasolStatusController.class);
 
     @GetMapping("/{id}")
-    public ModelAndView parasolStatusList(Parasol parasol) {
+    public ModelAndView parasolStatusListForm(Parasol parasol) {
         logger.debug("parasolStatusList --> " + parasol);
 
         ModelAndView modelAndView = new ModelAndView("parasolstatus/statuslist");
@@ -29,15 +31,11 @@ public class ParasolStatusController {
         return modelAndView;
     }
 
-    @GetMapping("/test/{id}")
-    public ModelAndView testParasolStatusList(Parasol parasol) {
-        logger.debug("parasolStatusList --> " + parasol);
+    @PostMapping(value ="/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public List<ParasolStatus> parasolStatusList(Parasol parasol) {
 
-        ModelAndView modelAndView = new ModelAndView("parasolstatus/statuslist");
-        modelAndView.addObject("parasolStatusList", parasolStatusService.parasolStatusList(parasol));
-        modelAndView.addObject("parasol", parasol);
 
-        return modelAndView;
+        return null;
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)

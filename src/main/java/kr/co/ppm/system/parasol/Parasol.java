@@ -12,6 +12,8 @@ public class Parasol implements Serializable {
     private double longitude;
     private String agentIpAddress;
     private String active;
+    private int startRn;
+    private int endRn;
 
     public Parasol() {
 
@@ -93,6 +95,22 @@ public class Parasol implements Serializable {
         this.active = active;
     }
 
+    public int getStartRn() {
+        return startRn;
+    }
+
+    public void setStartRn(int startRn) {
+        this.startRn = startRn;
+    }
+
+    public int getEndRn() {
+        return endRn;
+    }
+
+    public void setEndRn(int endRn) {
+        this.endRn = endRn;
+    }
+
     @Override
     public String toString() {
         return "Parasol{" +
@@ -104,7 +122,9 @@ public class Parasol implements Serializable {
                 ", latitude=" + latitude +
                 ", longitude=" + longitude +
                 ", agentIpAddress='" + agentIpAddress + '\'' +
-                ", active=" + active +
+                ", active='" + active + '\'' +
+                ", startRn=" + startRn +
+                ", endRn=" + endRn +
                 '}';
     }
 }

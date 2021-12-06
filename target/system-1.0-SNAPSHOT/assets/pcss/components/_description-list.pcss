@@ -1,0 +1,26 @@
+/* -- Description List */
+
+.ts-description-lists {
+  dl {
+    display: inline-block;
+    margin-right: 24px;
+    dt {
+      font-size: 13px;
+      opacity: .6;
+      margin-bottom: 4px;
+    }
+    dd {
+      font-size: 14px;
+    }
+  }
+}
+
+.ts-description-list__line {
+  dt {
+    float: left ?if media (min-width: 576px);
+  }
+  dd {
+    color: var(--color-text-light);
+    text-align: right ?if media (min-width: 576px);
+  }
+}

@@ -1,0 +1,63 @@
+/*-------------------------------------------
+  -- List
+-------------------------------------------*/
+ul {
+  line-height: 42px;
+
+  &.ts-list-colored-bullets {
+    list-style: none;
+    padding-left: 0;
+    li {
+      &:before {
+        text-shadow: 0 0 8px rgba( var(--color-primary), .8 );
+        content: "•";
+        color: var(--color-primary);
+        vertical-align: middle;
+        font-size: 28px;
+        padding-right: 12px;
+      }
+    }
+  }
+  &.ts-list-divided {
+    list-style: none;
+    padding-left: 0;
+    li {
+      border-bottom: 1px solid var(--color-grey-light);
+      padding-bottom: 5px;
+      padding-top: 5px;
+      &:last-child {
+        border-bottom: none;
+      }
+    }
+  }
+
+  &.ts-list-check-marks {
+    list-style: none;
+    padding-left: 0;
+    li {
+      position: relative;
+      padding-left: 24px;
+      color: var(--color-text-light);
+    }
+    .ts-checked {
+      color: var(--color-black);
+      &:before {
+        color: var(--color-primary);
+        content: "\f00c";
+        font-family: 'Font Awesome 5 Free';
+        font-weight: 900;
+        left: 0;
+        position: absolute;
+      }
+    }
+  }
+  &.ts-list-icons {
+    list-style: none;
+    padding-left: 0;
+    color: var(--color-text-light);
+    i {
+      margin-right: 8px;
+    }
+  }
+
+}

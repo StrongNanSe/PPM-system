@@ -1,0 +1,30 @@
+/*-------------------------------------------
+  -- Title
+-------------------------------------------*/
+
+.ts-title {
+  margin-bottom: 2rem ?if media (max-width: 575px);
+  margin-bottom: 2rem ?if media (min-width: 576px) and (max-width: 991px);
+  margin-bottom: 2rem ?if media (min-width: 992px);
+  /*
+  margin-bottom: 3rem ?if media (min-width: 576px) and (max-width: 991px);
+  margin-bottom: 4rem ?if media (min-width: 992px);
+   */
+
+  padding-bottom: 1rem;
+
+  h1 {
+    margin-bottom: 0;
+  }
+
+  h5 {
+    font-weight: normal;
+    opacity: .5;
+  }
+}
+
+.ts-block {
+  .ts-title {
+    margin-bottom: 2rem;
+  }
+}

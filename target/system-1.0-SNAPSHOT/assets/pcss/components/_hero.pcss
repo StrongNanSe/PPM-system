@@ -1,0 +1,124 @@
+/*-------------------------------------------
+  -- Hero
+-------------------------------------------*/
+#ts-hero {
+  display: flex;
+  position: relative;
+  overflow: hidden;
+
+  .ts-background-image {
+    background-position: top center;
+  }
+
+  .slide, .ts-image {
+    height: 100%;
+  }
+}
+
+/* Hero slider height */
+
+.ts-hero-slider {
+  .owl-carousel, .ts-slide {
+    height: 100%;
+  }
+  .owl-carousel {
+    opacity: 0;
+    transition: 1s ease;
+    &.owl-loaded {
+      opacity: 1;
+    }
+  }
+  .owl-item {
+    &.active {
+      .ts-slide-description {
+        h3, figure, .ts-description-list, .btn {
+          opacity: 1;
+          transform: translateY(0px);
+        }
+      }
+    }
+  }
+  .ts-slide-description {
+    background-color: rgba(0,0,0,.6);
+    bottom: 0;
+    color: var(--color-white);
+    position: absolute;
+    padding-bottom: 32px;
+    padding-top: 32px;
+    width: 100%;
+
+    h3 {
+      margin-bottom: 4px;
+      margin-bottom: 8px ?if media (min-width: 576px) and (max-width: 767px);
+      margin-bottom: 16px ?if media (min-width: 768px);
+    }
+
+    h2 {
+      margin-bottom: 12px;
+    }
+
+    h3, figure, .ts-description-list, .btn {
+      opacity: 0;
+      transition: var(--tr-cubic);
+      transform: translateY(16px);
+    }
+    figure {
+      transition-delay: .1s;
+    }
+    .ts-description-list {
+      transition-delay: .2s;
+    }
+    .btn {
+      transition-delay: .3s;
+    }
+  }
+}
+
+.ts-hero-slider-control {
+  height: 0;
+  bottom: 40px;
+  position: absolute;
+  z-index: 1;
+  width: 100%;
+  .container, .owl-nav {
+    height: 0;
+    text-align: right;
+  }
+  .owl-prev, .owl-next {
+    background-color: var(--color-white);
+    display: inline-block;
+    padding: 20px;
+    opacity: .8;
+    transition: var(--tr);
+    position: relative;
+
+    &:hover {
+      opacity: 1;
+      cursor: pointer;
+    }
+    &:after {
+      font-family: 'Font Awesome 5 Free';
+      font-weight: 900;
+      position: absolute;
+      height: 16px;
+      width: 6px;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      top: 0;
+      margin: auto;
+      font-size: 12px;
+    }
+  }
+  .owl-prev {
+    &:after {
+      content: "\f053";
+    }
+  }
+  .owl-next {
+    &:after {
+      content: "\f054";
+    }
+  }
+
+}
