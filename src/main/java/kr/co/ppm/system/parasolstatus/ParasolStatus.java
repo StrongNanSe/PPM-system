@@ -8,6 +8,7 @@ public class ParasolStatus implements Serializable {
     private String status;
     private int temperature;
     private String dateTime;
+    private int rn;
 
     public ParasolStatus() {
 
@@ -53,6 +54,14 @@ public class ParasolStatus implements Serializable {
         this.dateTime = dateTime;
     }
 
+    public int getRn() {
+        return rn;
+    }
+
+    public void setRn(int rn) {
+        this.rn = rn;
+    }
+
     @Override
     public String toString() {
         return "ParasolStatus{" +
@@ -61,6 +70,7 @@ public class ParasolStatus implements Serializable {
                 ", status='" + status + '\'' +
                 ", temperature=" + temperature +
                 ", dateTime='" + dateTime + '\'' +
+                ", rn=" + rn +
                 '}';
     }
 }

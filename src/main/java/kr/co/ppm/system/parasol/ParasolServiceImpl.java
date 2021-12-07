@@ -13,15 +13,19 @@ public class ParasolServiceImpl implements ParasolService {
 
     @Override
     public List<Parasol> parasolList(Parasol searchParasol) {
-        return parasolMapper.selectAll(searchParasol) != null
-                ? parasolMapper.selectAll(searchParasol)
+        List<Parasol> parasolList = parasolMapper.selectAll(searchParasol);
+
+        return parasolList != null
+                ? parasolList
                 : new ArrayList<Parasol>();
     }
 
     @Override
     public Parasol viewParasol(Parasol parasol) {
-        return parasolMapper.selectById(parasol) != null
-                ? parasolMapper.selectById(parasol)
+        Parasol viewParasol = parasolMapper.selectById(parasol);
+
+        return viewParasol != null
+                ? viewParasol
                 : new Parasol();
     }
 

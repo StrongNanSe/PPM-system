@@ -2,6 +2,8 @@ package kr.co.ppm.system.parasolstatus;
 
 import kr.co.ppm.system.control.ControlService;
 import kr.co.ppm.system.parasol.Parasol;
+import kr.co.ppm.system.util.Page;
+import kr.co.ppm.system.util.PageUtil;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,24 +20,37 @@ public class ParasolStatusController {
     private ParasolStatusService parasolStatusService;
     @Autowired
     private ControlService controlService;
+    @Autowired
+    private PageUtil pageUtil;
     private Logger logger = LogManager.getLogger(ParasolStatusController.class);
 
     @GetMapping("/{id}")
-    public ModelAndView parasolStatusListForm(Parasol parasol) {
+    public ModelAndView parasolStatusList(Parasol parasol) {
         logger.debug("parasolStatusList --> " + parasol);
 
         ModelAndView modelAndView = new ModelAndView("parasolstatus/statuslist");
-        modelAndView.addObject("parasolStatusList", parasolStatusService.parasolStatusList(parasol));
+
         modelAndView.addObject("parasol", parasol);
 
         return modelAndView;
     }
 
-    @PostMapping(value ="/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public List<ParasolStatus> parasolStatusList(Parasol parasol) {
+    @PostMapping(value ="/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = "application/text;charset=UTF-8")
+    public String parasolStatusList(@PathVariable String id, @RequestBody Page page) {
+        String drawPage = "";
+        page.setId(id);
 
+        logger.debug("page => " + page);
 
-        return null;
+        Page newPage = pageUtil.setPage(id ,parasolStatusService.parasolStatusList(page).size(), page.getPageNo());
+
+        logger.debug("newPage => " + newPage);
+
+        List<ParasolStatus> parasolStatusList = parasolStatusService.parasolStatusList(newPage);
+
+        drawPage = pageUtil.drawPage(newPage, parasolStatusList);
+
+        return drawPage;
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)

@@ -8,7 +8,7 @@ import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-@Controller
+@RestController
 @RequestMapping("/control")
 public class ControlController {
     @Autowired
@@ -16,9 +16,11 @@ public class ControlController {
     private Logger logger = LogManager.getLogger(ControlController.class);
 
     @PostMapping(value ="/{action}", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public void sendParasolControl(@RequestBody Parasol parasol, @PathVariable String action) {
+    public String sendParasolControl(@RequestBody Parasol parasol, @PathVariable String action) {
         logger.debug("id :" + parasol.getId() + " " + "action :" + action);
 
-        controlService.sendControl(parasol, action);
+        String code = controlService.sendControl(parasol, action);
+
+        return null;
     }
 }

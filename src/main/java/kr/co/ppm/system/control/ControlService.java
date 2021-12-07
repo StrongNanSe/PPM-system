@@ -6,6 +6,6 @@ import kr.co.ppm.system.parasolstatus.ParasolStatus;
 import java.util.List;
 
 public interface ControlService {
-    void sendControl(Parasol parasol, String action);
+    String sendControl(Parasol parasol, String action);
     String analysisStatus(ParasolStatus parasolStatus);
 }

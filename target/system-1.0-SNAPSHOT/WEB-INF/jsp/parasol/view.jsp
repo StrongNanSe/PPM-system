@@ -24,7 +24,7 @@
                         <div class="ts-title mb-0">
                             <div class="row">
                                 <div class="ts-title mb-0 col-sm-10">
-                                    <h1 style="font-weight : 500">상세 정보</h1>
+                                    <h1 style="font-weight : 400">상세 정보</h1>
                                 </div>
                                 <div class="ts-title mb-2 col-sm-2" style="text-align: center">
                                     <a class="card btn-outline-primary btn-sm m-1 px-3" href="/status/${parasol.id}?managementNo=${parasol.managementNo}">상태 정보 조회</a>
@@ -54,10 +54,10 @@
                                                 <div class="ts-title mb-2 col-sm-2">
                                                     <c:choose>
                                                         <c:when test="${parasol.active == 'Y'}">
-                                                            <a href="javascript:void(0);" onclick="editActivePopup()" class="card ts-item ts-card ts-result border border-primary rounded-circle">
+                                                            <a class="card ts-item ts-card ts-result border border-primary rounded-circle" data-toggle="modal" data-target="#activeCenter">
                                                         </c:when>
                                                         <c:otherwise>
-                                                            <a href="javascript:void(0);" onclick="editActivePopup()" class="card ts-item ts-card ts-result border border-danger rounded-circle">
+                                                            <a class="card ts-item ts-card ts-result border border-danger rounded-circle" data-toggle="modal" data-target="#activeCenter">
                                                         </c:otherwise>
                                                     </c:choose>
                                                         <label style="text-align: center">활성</label>
@@ -92,10 +92,72 @@
                                                     <p style="font-size: 1.3em">${parasol.longitude}</p>
                                                 </div>
                                                 <div class="col-sm-auto">
-                                                    <a href="javascript:void(0);" onclick="editAddressPopup()" class="card ts-item ts-card ts-result">
+                                                    <button type="button" class="card ts-item ts-card ts-result" data-toggle="modal" data-target="#modalCenter">
                                                         <label>설치주소</label>
                                                         <p style="font-size: 1.3em">${parasol.installAddress}</p>
-                                                    </a>
+                                                    </button>
+                                                </div>
+                                                <!--주소 수정 모달-->
+                                                <div class="modal fade" id="modalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title" id="ModalLongTitle">주소 수정</h5>
+                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                </button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <input type="text" class="form-control" id="editAddressText" value="${parasol.installAddress}"/>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
+                                                                <button type="button" id="editAddressButton" class="btn btn-primary">수정</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="modal fade" id="checkCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title" id="checkLongTitle">공백은 입력할 수 없습니다.</h5>
+                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                </button>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" id="checkButton" class="btn btn-primary" data-dismiss="modal">확인</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!--활성 변경 모달-->
+                                                <div class="modal fade" id="activeCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title" id="activeLongTitle">활성화 변경</h5>
+                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                </button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <c:choose>
+                                                                    <c:when test="${parasol.active == 'Y'}">
+                                                                        <h3 class="form-check">비활성 상태로 변경하시겠습니까?</h3>
+                                                                    </c:when>
+                                                                    <c:otherwise>
+                                                                        <h3 class="form-check">활성 상태로 변경하시겠습니까?</h3>
+                                                                    </c:otherwise>
+                                                                </c:choose>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
+                                                                <button type="button" id="editActiveButton" class="btn btn-primary">확인</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                                 <!--end col-md-4-->
                                                 <!--Type Select-->
@@ -121,30 +183,24 @@
         <!--end page-->
 
         <script>
-            function editAddressPopup() {
-                edit = prompt("주소 수정", "${parasol.installAddress}");
+            document.getElementById("editAddressButton").addEventListener("click", editAddress, false);
+            document.getElementById("editActiveButton").addEventListener("click", editActive, false);
 
-                if (edit == null) {
-                    alert("수정을 취소했습니다.");
-                } else if (edit == "") {
-                    alert("공백은 입력할 수 없습니다.");
-                    editPopup();
+            function editAddress() {
+                var editAddressText = document.getElementById("editAddressText").value;
+
+                if (editAddressText == "") {
+                    $("#checkCenter").modal({keyboard : false})
                 } else {
-                    if (confirm("(" + edit + ")로 수정 하시겠습니까?")) {
-                        sendEdit({"id":"${parasol.id}","installAddress":edit});
-                    }
+                    sendEdit({"id":"${parasol.id}","installAddress":editAddressText});
                 }
             }
 
-            function editActivePopup() {
+            function editActive() {
                 if ("${parasol.active}" == "Y") {
-                    if (confirm("비활성 상태로 변경하시겠습니까?")) {
-                        sendEdit({"id":"${parasol.id}","active":"N"});
-                    }
+                    sendEdit({"id":"${parasol.id}","active":"N"});
                 } else {
-                    if (confirm("활성 상태로 변경하시겠습니까?")) {
-                        sendEdit({"id":"${parasol.id}","active":"Y"});
-                    }
+                    sendEdit({"id":"${parasol.id}","active":"Y"});
                 }
             }
 

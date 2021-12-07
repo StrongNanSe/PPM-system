@@ -237,14 +237,14 @@
                                 + '        </div>'
                                 + '        <div class="col-sm-4">'
                                 + '            <label>온도</label>'
-                                + '            <p>' + document.getElementById("temperature" + i).value + '</p>'
+                                + '            <p>' + document.getElementById("temperature" + i).value + '℃</p>'
                                 + '        </div>'
                                 + '        <div class="col-sm-12 mb-0 mb-sm-0 btn-sm d-block d-sm-inline-block">'
                                 + '            <label>일시</label>'
                                 + '            <p>' + document.getElementById("dateTime" + i).value + '</p>'
                                 + '        </div>'
                                 + '        <div class="col-sm-12 mb-1">'
-                                + '           <a href="javascript:void(0);" onclick="sendAction(document.getElementById(`id' + i + '`).value, document.getElementById(`action' + i + '`).value);" class="btn btn-primary">' + statusKr + '</a>'
+                                + '           <a href="javascript:void(0);" id="actionButton" onclick="sendAction(document.getElementById(`id' + i + '`).value, document.getElementById(`action' + i + '`).value);" class="btn btn-primary">' + statusKr + '</a>'
                                 + '        </div>'
                                 + '    </div>'
                                 + '</section>'
@@ -272,7 +272,7 @@
                                                                         + '    <p class="card ts-item ts-card ts-result">'
                                                                         + '        <div class="card-body">'
                                                                         + '            <figure class="ts-item__info">'
-                                                                        + '                <h4>검색 결과가 없습니다</h4>'
+                                                                        + '                <h4 class="text-center">검색 결과가 없습니다</h4>'
                                                                         + '            </figure>'
                                                                         + '        </div>'
                                                                         + '    </p>'
@@ -282,7 +282,9 @@
             }
 
             function sendAction(sendId, action) {
-                console.log(sendId);
+                document.getElementById("actionButton").removeAttribute('onclick');
+                document.getElementById("actionButton").setAttribute('class', 'btn btn-outline-secondary btn-sm');
+                document.getElementById("actionButton").innerText = "동작중";
 
                 xmlHttpRequest = new XMLHttpRequest();
 
@@ -300,7 +302,8 @@
 
             function responseBysendAction() {
                 if (xmlHttpRequest.readyState == 4 && xmlHttpRequest.status == 200) {
-                    console.log("Good!!");
+                    code = JSON.parse(xmlHttpRequest.responseText);
+                    console.log(code);
                 }
             }
 

@@ -24,7 +24,7 @@ public class ControlServiceImpl implements ControlService{
     private Map<String, String> actionList = new Hashtable<String, String>();
 
     @Override
-    public void sendControl(Parasol parasol, String action) {
+    public String sendControl(Parasol parasol, String action) {
         Parasol controlParasol = parasolMapper.selectById(parasol);
 
         actionList.put(controlParasol.getId(), action);
@@ -33,8 +33,9 @@ public class ControlServiceImpl implements ControlService{
 
         logger.info("this is url : " + url);
 
+        String responseCode = null;
+
         try{
-            String responseCode = null;
             OkHttpClient client = new OkHttpClient();
 
             Request request = new Request.Builder()
@@ -48,9 +49,11 @@ public class ControlServiceImpl implements ControlService{
 
             logger.info(responseCode);
         } catch (Exception e) {
-            // TODO 오류처리
             logger.info("Exception Occurred in method sendControl");
+            e.printStackTrace();
         }
+
+        return responseCode;
     }
 
     @Override

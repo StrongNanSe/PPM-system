@@ -7,6 +7,7 @@
     <resultMap id="parasolStatusResultMap"
                type="kr.co.ppm.system.parasolstatus.ParasolStatus">
         <id column="NO" property="no" />
+        <result column="RN" property="rn" />
         <result column="PARASOL_ID" property="parasolId" />
         <result column="STATUS" property="status" />
         <result column="TEMPERATURE" property="temperature" />
@@ -26,33 +27,20 @@
                 , NOW())
     </insert>
 
-    <select id="selectAll"
-            parameterType="kr.co.ppm.system.parasol.Parasol"
-            resultMap="parasolStatusResultMap">
-        SELECT STATUS
-                , TEMPERATURE
-                , DATE_TIME
-        FROM PARASOL_STATUS
-        <where>
-            PARASOL_ID = #{id}
-        </where>
-        ORDER BY DATE_TIME DESC
-    </select>
-
     <select id="selectAllByRownum"
-            parameterType="kr.co.ppm.system.parasol.Parasol"
+            parameterType="kr.co.ppm.system.util.Page"
             resultMap="parasolStatusResultMap">
         SELECT @ROWNUM:=@ROWNUM+1 AS RN
                 , STATUS
                 , TEMPERATURE
                 , DATE_TIME
-        FROM PARASOL_STATUS, (SELECT @ROWNUM:=${startRn}) R
+        FROM PARASOL_STATUS, (SELECT @ROWNUM:=0) R
         <where>
             PARASOL_ID = #{id}
         </where>
-        ORDER BY DATE_TIME DESC
-        <if test="startRn != 0">
-            LIMIT #{startRn}, #{endRn}
+        ORDER BY DATE_TIME DESC, RN DESC
+        <if test="endRn > 0">
+            LIMIT #{startRn}, 10
         </if>
     </select>
 
