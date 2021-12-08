@@ -1,5 +1,7 @@
 package kr.co.ppm.system.parasolstatus;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import kr.co.ppm.system.control.ControlService;
 import kr.co.ppm.system.parasol.Parasol;
 import kr.co.ppm.system.util.Page;
@@ -66,24 +68,42 @@ public class ParasolStatusController {
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public String receiveParasolStatus(@RequestBody ParasolStatus parasolStatus) {
+        Gson code = new Gson();
+
+        JsonObject jsonObject = new JsonObject();
+        jsonObject.addProperty("code", 200);
+        jsonObject.addProperty("message", "null");
+
         String receiveStatus = parasolStatus.getStatus();
 
         if ("U".equals(receiveStatus)) {
             parasolStatus.setStatus("펼침");
         } else if ("F".equals(receiveStatus)) {
             parasolStatus.setStatus("접힘");
+        } else {
+            jsonObject.addProperty("code", 500);
+            jsonObject.addProperty("message", "Status is Unsuitable");
+
+            return code.toJson(jsonObject);
         }
 
-        String code = parasolStatusService.receiveParasolStatus(parasolStatus);
+        parasolStatusService.receiveParasolStatus(parasolStatus);
 
         parasolStatus.setStatus(receiveStatus);
 
         String sendAction = controlService.analysisStatus(parasolStatus);
 
-        if (sendAction != null) {
-            controlService.sendControl(new Parasol(parasolStatus.getParasolId()), sendAction);
+        try {
+            if (sendAction != null) {
+                controlService.sendControl(new Parasol(parasolStatus.getParasolId()), sendAction);
+            }
+        } catch (Exception e) {
+            jsonObject.addProperty("code", 500);
+            jsonObject.addProperty("message", "Status is Unsuitable");
+
+            return code.toJson(jsonObject);
         }
 
-        return code;
+        return code.toJson(jsonObject);
     }
 }

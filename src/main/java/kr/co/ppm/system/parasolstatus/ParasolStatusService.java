@@ -8,5 +8,5 @@ import java.util.List;
 public interface ParasolStatusService {
     List<ParasolStatus> parasolStatusList(Page page);
     ParasolStatus viewParasolStatus(Parasol parasol);
-    String receiveParasolStatus(ParasolStatus parasolStatus);
+    void receiveParasolStatus(ParasolStatus parasolStatus);
 }
