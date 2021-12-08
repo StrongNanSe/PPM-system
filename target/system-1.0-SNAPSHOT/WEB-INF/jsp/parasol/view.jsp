@@ -48,52 +48,53 @@
                                             <!--Title-->
                                             <div class="row">
                                                 <div class="ts-title mb-2 col-sm-10">
-                                                    <label style="font-size: 1.3em">관리번호</label>
+                                                    <label class="badge badge-light" style="font-size: 1.3em; font-weight: 500">관리번호</label>
                                                     <h3 style="font-size: 1.8em" class="mb-1 border-bottom">${parasol.managementNo}</h3>
                                                 </div>
-                                                <div class="ts-title mb-2 col-sm-2">
+                                                <div class="d-flex align-items-start flex-column" style="text-align: center">
+                                                    <label class="badge badge-light p-2" style="text-align: center; font-size: 1.3em; font-weight: 500; width: 55px">활성</label>
                                                     <c:choose>
                                                         <c:when test="${parasol.active == 'Y'}">
-                                                            <a class="card ts-item ts-card ts-result border border-primary rounded-circle" data-toggle="modal" data-target="#activeCenter">
+                                                            <h3 class="p-2" style="margin: auto">
+                                                                <button type="button" class="card ts-item ts-card ts-result border text-primary" style="font-size: 1.5em" title="활성상태 변경 버튼" data-toggle="modal" data-placement="Tooltip on right" data-target="#activeCenter">${parasol.active}</button>
                                                         </c:when>
                                                         <c:otherwise>
-                                                            <a class="card ts-item ts-card ts-result border border-danger rounded-circle" data-toggle="modal" data-target="#activeCenter">
+                                                            <h3 class="p-2" style="margin: auto">
+                                                                <button type="button" class="card ts-item ts-card ts-result border text-danger" style="font-size: 1.5em" title="활성상태 변경 버튼"  data-toggle="modal" data-placement="Tooltip on right" data-target="#activeCenter">${parasol.active}</button>
                                                         </c:otherwise>
                                                     </c:choose>
-                                                        <label style="text-align: center; font-size: 1.3em">활성</label>
-                                                        <p style="text-align: center; font-size: 1.5em">${parasol.active}</p>
-                                                    </a>
+                                                    </h3>
                                                 </div>
                                             </div>
                                             <!--Row-->
                                             <div class="row">
                                                 <!--관리기관-->
                                                 <div class="col-sm-4">
-                                                    <label style="font-size: 1.3em">관리기관</label>
+                                                    <label class="badge badge-light" style="font-size: 1.3em; font-weight: 500">관리기관</label>
                                                     <p style="font-size: 1.5em">${parasol.managementAgency}</p>
                                                 </div>
                                                 <!--설치일자-->
                                                 <div class="col-sm-4">
-                                                    <label style="font-size: 1.3em">설치일자</label>
+                                                    <label class="badge badge-light" style="font-size: 1.3em; font-weight: 500">설치일자</label>
                                                     <p style="font-size: 1.5em">${parasol.installDate}</p>
                                                 </div>
                                                 <div class="col-sm-4">
-                                                    <label style="font-size: 1.3em">에이전트 IP 주소</label>
+                                                    <label class="badge badge-light" style="font-size: 1.3em; font-weight: 500">에이전트 IP 주소</label>
                                                     <p style="font-size: 1.5em">${parasol.agentIpAddress}</p>
                                                 </div>
                                                 <!--위도-->
                                                 <div class="col-sm-4">
-                                                    <label style="font-size: 1.3em">위도</label>
+                                                    <label class="badge badge-light" style="font-size: 1.3em; font-weight: 500">위도</label>
                                                     <p style="font-size: 1.5em">${parasol.latitude}</p>
                                                 </div>
                                                 <!--경도-->
                                                 <div class="col-sm-4">
-                                                    <label style="font-size: 1.3em">경도</label>
+                                                    <label class="badge badge-light" style="font-size: 1.3em; font-weight: 500">경도</label>
                                                     <p style="font-size: 1.5em">${parasol.longitude}</p>
                                                 </div>
                                                 <div class="col-sm-auto">
-                                                    <button type="button" class="card ts-item ts-card ts-result" data-toggle="modal" data-target="#modalCenter">
-                                                        <label style="font-size: 1.3em">설치주소</label>
+                                                    <label class="badge badge-light" style="font-size: 1.3em; font-weight: 500">설치주소</label>
+                                                    <button type="button" class="card ts-item ts-card ts-result border" title="설치주소 변경 버튼" data-placement="Tooltip on bottom" data-toggle="modal" data-toggle="tooltip" data-target="#modalCenter">
                                                         <p style="font-size: 1.5em">${parasol.installAddress}</p>
                                                     </button>
                                                 </div>

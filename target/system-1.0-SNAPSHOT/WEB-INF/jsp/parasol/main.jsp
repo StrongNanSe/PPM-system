@@ -319,7 +319,6 @@
                             console.log(status);
 
                             document.getElementById("status" + indexI).setAttribute('value', status);
-                            console.log(document.getElementById("status" + indexI).value);
 
                             if (status == "펼침") {
                                 document.getElementById("action" + indexI).setAttribute('value', "F");
@@ -328,8 +327,6 @@
                                 document.getElementById("action" + indexI).setAttribute('value', "U");
                                 document.getElementById("actionButton").innerText = "펼치기";
                             }
-
-                            console.log(document.getElementById("action" + indexI).value);
 
                             document.getElementById("actionButton").removeAttribute('disabled');
                             document.getElementById("actionButton").setAttribute('class', "btn btn-primary");

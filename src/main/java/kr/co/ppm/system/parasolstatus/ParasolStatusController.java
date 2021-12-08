@@ -68,10 +68,12 @@ public class ParasolStatusController {
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public String receiveParasolStatus(@RequestBody ParasolStatus parasolStatus) {
+        logger.debug(parasolStatus);
+
         Gson code = new Gson();
 
         JsonObject jsonObject = new JsonObject();
-        jsonObject.addProperty("code", 200);
+        jsonObject.addProperty("code", "200");
         jsonObject.addProperty("message", "null");
 
         String receiveStatus = parasolStatus.getStatus();
@@ -81,7 +83,7 @@ public class ParasolStatusController {
         } else if ("F".equals(receiveStatus)) {
             parasolStatus.setStatus("접힘");
         } else {
-            jsonObject.addProperty("code", 500);
+            jsonObject.addProperty("code", "500");
             jsonObject.addProperty("message", "Status is Unsuitable");
 
             return code.toJson(jsonObject);
@@ -98,7 +100,7 @@ public class ParasolStatusController {
                 controlService.sendControl(new Parasol(parasolStatus.getParasolId()), sendAction);
             }
         } catch (Exception e) {
-            jsonObject.addProperty("code", 500);
+            jsonObject.addProperty("code", "500");
             jsonObject.addProperty("message", "Status is Unsuitable");
 
             return code.toJson(jsonObject);

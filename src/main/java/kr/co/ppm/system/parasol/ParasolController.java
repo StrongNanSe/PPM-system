@@ -79,7 +79,7 @@ public class ParasolController {
         Gson code = new Gson();
 
         JsonObject jsonObject = new JsonObject();
-        jsonObject.addProperty("code", 200);
+        jsonObject.addProperty("code", "200");
         jsonObject.addProperty("message", "null");
 
         parasolService.receiveParasol(parasol);
