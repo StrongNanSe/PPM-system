@@ -35,6 +35,8 @@ public class ParasolController {
             searchParasol.setActive(null);
         }
 
+        searchParasol.setManagementNo(searchParasol.getManagementNo().trim());
+
         List<Mark> markList = new ArrayList<Mark>();
         List<Parasol> parasolList = parasolService.parasolList(searchParasol);
 

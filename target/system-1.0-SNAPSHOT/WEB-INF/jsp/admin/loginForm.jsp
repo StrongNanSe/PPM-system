@@ -18,7 +18,7 @@
 				<nav id="ts-primary-navigation" class="navbar navbar-expand-md navbar-light">
 					<div class="container">
 						<!--Brand Logo-->
-						<p style="font-size: 2em; font-weight : 700; color: #005cbf" >공공 파라솔 관리 시스템</p>
+						<p style="font-size: 2.5em; font-weight : 700; color: #005cbf" >공공 파라솔 관리 시스템</p>
 					</div>
 					<!--end container-->
 				</nav>

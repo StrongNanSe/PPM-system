@@ -27,7 +27,7 @@
                                     <h1 style="font-weight : 400">상세 정보</h1>
                                 </div>
                                 <div class="ts-title mb-2 col-sm-2" style="text-align: center">
-                                    <a class="card btn-outline-primary btn-sm m-1 px-3" href="/status/${parasol.id}?managementNo=${parasol.managementNo}">상태 정보 조회</a>
+                                    <a class="card btn-outline-primary btn-sm m-1 px-3" style="font-size: 1.3em" href="/status/${parasol.id}?managementNo=${parasol.managementNo}">상태 정보 조회</a>
                                 </div>
                             </div>
                         </div>
@@ -48,7 +48,7 @@
                                             <!--Title-->
                                             <div class="row">
                                                 <div class="ts-title mb-2 col-sm-10">
-                                                    <label>관리번호</label>
+                                                    <label style="font-size: 1.3em">관리번호</label>
                                                     <h3 style="font-size: 1.8em" class="mb-1 border-bottom">${parasol.managementNo}</h3>
                                                 </div>
                                                 <div class="ts-title mb-2 col-sm-2">
@@ -60,7 +60,7 @@
                                                             <a class="card ts-item ts-card ts-result border border-danger rounded-circle" data-toggle="modal" data-target="#activeCenter">
                                                         </c:otherwise>
                                                     </c:choose>
-                                                        <label style="text-align: center">활성</label>
+                                                        <label style="text-align: center; font-size: 1.3em">활성</label>
                                                         <p style="text-align: center; font-size: 1.5em">${parasol.active}</p>
                                                     </a>
                                                 </div>
@@ -69,32 +69,32 @@
                                             <div class="row">
                                                 <!--관리기관-->
                                                 <div class="col-sm-4">
-                                                    <label>관리기관</label>
-                                                    <p style="font-size: 1.3em">${parasol.managementAgency}</p>
+                                                    <label style="font-size: 1.3em">관리기관</label>
+                                                    <p style="font-size: 1.5em">${parasol.managementAgency}</p>
                                                 </div>
                                                 <!--설치일자-->
                                                 <div class="col-sm-4">
-                                                    <label>설치일자</label>
-                                                    <p style="font-size: 1.3em">${parasol.installDate}</p>
+                                                    <label style="font-size: 1.3em">설치일자</label>
+                                                    <p style="font-size: 1.5em">${parasol.installDate}</p>
                                                 </div>
                                                 <div class="col-sm-4">
-                                                    <label>에이전트 IP 주소</label>
-                                                    <p style="font-size: 1.3em">${parasol.agentIpAddress}</p>
+                                                    <label style="font-size: 1.3em">에이전트 IP 주소</label>
+                                                    <p style="font-size: 1.5em">${parasol.agentIpAddress}</p>
                                                 </div>
                                                 <!--위도-->
                                                 <div class="col-sm-4">
-                                                    <label>위도</label>
-                                                    <p style="font-size: 1.3em">${parasol.latitude}</p>
+                                                    <label style="font-size: 1.3em">위도</label>
+                                                    <p style="font-size: 1.5em">${parasol.latitude}</p>
                                                 </div>
                                                 <!--경도-->
                                                 <div class="col-sm-4">
-                                                    <label>경도</label>
-                                                    <p style="font-size: 1.3em">${parasol.longitude}</p>
+                                                    <label style="font-size: 1.3em">경도</label>
+                                                    <p style="font-size: 1.5em">${parasol.longitude}</p>
                                                 </div>
                                                 <div class="col-sm-auto">
                                                     <button type="button" class="card ts-item ts-card ts-result" data-toggle="modal" data-target="#modalCenter">
-                                                        <label>설치주소</label>
-                                                        <p style="font-size: 1.3em">${parasol.installAddress}</p>
+                                                        <label style="font-size: 1.3em">설치주소</label>
+                                                        <p style="font-size: 1.5em">${parasol.installAddress}</p>
                                                     </button>
                                                 </div>
                                                 <!--주소 수정 모달-->

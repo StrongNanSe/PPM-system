@@ -21,6 +21,6 @@ public class ControlController {
 
         String code = controlService.sendControl(parasol, action);
 
-        return null;
+        return code;
     }
 }

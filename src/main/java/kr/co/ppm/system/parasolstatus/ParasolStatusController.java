@@ -53,6 +53,17 @@ public class ParasolStatusController {
         return drawPage;
     }
 
+    @GetMapping(value="/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = "application/text;charset=UTF-8")
+    public String viewParasolStatus(Parasol parasol) {
+        logger.debug(parasol);
+
+        String status = parasolStatusService.viewParasolStatus(parasol).getStatus();
+
+        logger.debug("status -> " + status);
+
+        return status;
+    }
+
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public String receiveParasolStatus(@RequestBody ParasolStatus parasolStatus) {
         String receiveStatus = parasolStatus.getStatus();

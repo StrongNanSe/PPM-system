@@ -25,10 +25,10 @@
                             <div class="row">
                                 <div class="ts-title mb-0 col-sm-10">
                                     <h1 style="font-weight : 400">상태 정보</h1>
-                                    <label style="font-weight : 200; font-size: 1.5em">${parasol.managementNo}</label>
+                                    <label style="font-weight : 200; font-size: 1.7em">${parasol.managementNo}</label>
                                 </div>
                                 <div class="ts-title mb-2 col-sm-2" style="text-align: center">
-                                    <a class="card btn-outline-primary btn-sm m-1 px-3" href="/parasol/${parasol.id}">상세 정보 조회</a>
+                                    <a class="card btn-outline-primary btn-sm m-1 px-3" style="font-size: 1.3em" href="/parasol/${parasol.id}">상세 정보 조회</a>
                                 </div>
                             </div>
                         </div>

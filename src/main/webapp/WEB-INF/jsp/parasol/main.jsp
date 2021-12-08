@@ -19,7 +19,7 @@
                 <nav id="ts-primary-navigation" class="navbar navbar-expand-md navbar-light">
                     <div class="container">
                         <!--Brand Logo-->
-                        <p style="font-size: 2em; font-weight : 700; color: white" >공공 파라솔 관리 시스템</p>
+                        <p style="font-size: 2.5em; font-weight : 700; color: white" >공공 파라솔 관리 시스템</p>
                         <!--Collapsing Navigation-->
                         <div class="collapse navbar-collapse" id="navbarPrimary">
                             <!--RIGHT NAVIGATION MAIN LEVEL
@@ -28,7 +28,7 @@
                                 <!--LOGOUT (Main level)
                                 =============================================================================================-->
                                 <li class="nav-item">
-                                    <a class="btn btn-outline-secondary btn-sm d-block d-sm-inline-block mb-2 mb-sm-0" href="/logout">로그아웃</a>
+                                    <a class="btn btn-outline-secondary btn-sm d-block d-sm-inline-block mb-2 mb-sm-0" style="font-size: 1.5em" href="/logout">로그아웃</a>
                                 </li>
                             </ul>
                             <!--end Right navigation-->
@@ -120,18 +120,16 @@
             let infowindows = [];
 
             function search() {
-                xmlHttpRequest = new XMLHttpRequest();
-                xmlHttpRequest.open("GET", "/parasol?managementNo=" + document.getElementById("keyword").value + "&active=" + document.getElementById("type").value, true);
-                xmlHttpRequest.setRequestHeader("Content-Type","application/json;charset=UTF-8");
-
-                xmlHttpRequest.send();
-
-                xmlHttpRequest.onreadystatechange = getData;
+                searchXmlHttpRequest = new XMLHttpRequest();
+                searchXmlHttpRequest.open("GET", "/parasol?managementNo=" + document.getElementById("keyword").value + "&active=" + document.getElementById("type").value, true);
+                searchXmlHttpRequest.setRequestHeader("Content-Type","application/json;charset=UTF-8");
+                searchXmlHttpRequest.send();
+                searchXmlHttpRequest.onreadystatechange = getData;
             }
 
             function getData() {
-                if (xmlHttpRequest.readyState == 4 && xmlHttpRequest.status == 200) {
-                    dataToJson = JSON.parse(xmlHttpRequest.responseText);
+                if (searchXmlHttpRequest.readyState == 4 && searchXmlHttpRequest.status == 200) {
+                    dataToJson = JSON.parse(searchXmlHttpRequest.responseText);
                 }
 
                 if (markers.length > 0) {
@@ -187,8 +185,8 @@
                                     + '        <input type="hidden" id="action' + i + '" value="' + action + '" />'
                                     + '        <div class="card-body">'
                                     + '            <figure class="ts-item__info">'
-                                    + '                <h4>' + managementNo + '</h4>'
-                                    + '                <aside class="' + color + '">'
+                                    + '                <h3>' + managementNo + '</h3>'
+                                    + '                <aside class="' + color + '" style="font-size: 1em">'
                                     + '                    <i class="fa fa-map-marker mr-2"></i>'
                                     +                      activeKr
                                     + '                </aside>'
@@ -224,7 +222,7 @@
                             var contentString = [
                                   '<section id="basic-information" style="margin: auto; width: fit-content" class="mb-1 pl-0">'
                                 + '    <div class="mb-2 card ts-item ts-card ts-result">'
-                                + '        <a style="text-align: center; width: 100%;" href="/parasol/' + document.getElementById("id" + i).value + '">' + document.getElementById("managementNo" + i).value + '</a>'
+                                + '        <a style="text-align: center; width: 100%; font-size: 1.5em" href="/parasol/' + document.getElementById("id" + i).value + '">' + document.getElementById("managementNo" + i).value + '</a>'
                                 + '    </div>'
                                 + '    <div style="text-align: center; margin: auto" class="row">'
                                 + '        <div class="col-sm-4">'
@@ -244,7 +242,7 @@
                                 + '            <p>' + document.getElementById("dateTime" + i).value + '</p>'
                                 + '        </div>'
                                 + '        <div class="col-sm-12 mb-1">'
-                                + '           <a href="javascript:void(0);" id="actionButton" onclick="sendAction(document.getElementById(`id' + i + '`).value, document.getElementById(`action' + i + '`).value);" class="btn btn-primary">' + statusKr + '</a>'
+                                + '           <a href="javascript:void(0);" id="actionButton" onclick="sendAction(document.getElementById(`id' + i + '`).value, document.getElementById(`action' + i + '`).value, ' + i + ');" class="btn btn-primary">' + statusKr + '</a>'
                                 + '        </div>'
                                 + '    </div>'
                                 + '</section>'
@@ -281,29 +279,59 @@
                 }
             }
 
-            function sendAction(sendId, action) {
-                document.getElementById("actionButton").removeAttribute('onclick');
+            function sendAction(sendId, action, index) {
+                indexI = index;
+                sendIdI = sendId;
+
+                document.getElementById("actionButton").setAttribute('disabled', 'disabled');
                 document.getElementById("actionButton").setAttribute('class', 'btn btn-outline-secondary btn-sm');
                 document.getElementById("actionButton").innerText = "동작중";
 
-                xmlHttpRequest = new XMLHttpRequest();
+                actionXmlHttpRequest = new XMLHttpRequest();
 
                 if (action == "F") {
-                    xmlHttpRequest.open("POST", "/control/F", true);
+                    actionXmlHttpRequest.open("POST", "/control/F", true);
                 } else {
-                    xmlHttpRequest.open("POST", "/control/U", true);
+                    actionXmlHttpRequest.open("POST", "/control/U", true);
                 }
-                xmlHttpRequest.setRequestHeader("Content-Type","application/json;charset=UTF-8");
+                actionXmlHttpRequest.setRequestHeader("Content-Type","application/json;charset=UTF-8");
 
-                xmlHttpRequest.send('{"id" : "' + sendId + '"}');
+                actionXmlHttpRequest.ontimeout = function () {
+                    actionXmlHttpRequest.send('{"id" : "' + sendId + '"}');
+                }
 
-                xmlHttpRequest.onreadystatechange = responseBysendAction;
+                actionXmlHttpRequest.send('{"id" : "' + sendId + '"}');
+                actionXmlHttpRequest.onreadystatechange = responseBysendAction;
             }
 
             function responseBysendAction() {
-                if (xmlHttpRequest.readyState == 4 && xmlHttpRequest.status == 200) {
-                    code = JSON.parse(xmlHttpRequest.responseText);
+                if (actionXmlHttpRequest.readyState == 4 && actionXmlHttpRequest.status == 200) {
+                    code = JSON.parse(actionXmlHttpRequest.responseText);
                     console.log(code);
+
+                    StatusXmlHttpRequest = new XMLHttpRequest();
+                    StatusXmlHttpRequest.open("GET", "/status/" + sendIdI, true);
+                    StatusXmlHttpRequest.setRequestHeader("Content-Type","application/json;charset=UTF-8");
+                    StatusXmlHttpRequest.send();
+                    StatusXmlHttpRequest.onreadystatechange = function () {
+                        if (StatusXmlHttpRequest.readyState == 4 && StatusXmlHttpRequest.status == 200) {
+                            status = StatusXmlHttpRequest.responseText;
+                            console.log(status);
+
+                            document.getElementById("status" + indexI).setAttribute('value', status);
+
+                            if (status == "펼침") {
+                                document.getElementById("action" + indexI).setAttribute('value', "F");
+                                document.getElementById("actionButton").innerText = "접기";
+                            } else {
+                                document.getElementById("action" + indexI).setAttribute('value', "U");
+                                document.getElementById("actionButton").innerText = "펼치기";
+                            }
+
+                            document.getElementById("actionButton").removeAttribute('disabled');
+                            document.getElementById("actionButton").setAttribute('class', "btn btn-primary");
+                        }
+                    }
                 }
             }
 
