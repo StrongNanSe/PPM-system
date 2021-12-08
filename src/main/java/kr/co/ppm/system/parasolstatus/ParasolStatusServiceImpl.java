@@ -1,5 +1,7 @@
 package kr.co.ppm.system.parasolstatus;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import kr.co.ppm.system.parasol.Parasol;
 import kr.co.ppm.system.parasol.ParasolMapper;
 import kr.co.ppm.system.util.Page;
@@ -37,20 +39,9 @@ public class ParasolStatusServiceImpl implements ParasolStatusService {
     }
 
     @Override
-    public String receiveParasolStatus(ParasolStatus parasolStatus) {
+    public void receiveParasolStatus(ParasolStatus parasolStatus) {
         if (parasolMapper.selectById(new Parasol(parasolStatus.getParasolId())) != null) {
             parasolStatusMapper.insert(parasolStatus);
         }
-
-        // TODO 오류처리
-        String code = "{" +
-                "    \"code\": \"200\"," +
-                "    \"error\": {" +
-                "        \"errorCode\": \"0\"," +
-                "        \"message\": \"null\"" +
-                "    }" +
-                "}";
-
-        return code;
     }
 }

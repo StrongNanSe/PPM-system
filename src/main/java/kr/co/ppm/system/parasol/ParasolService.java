@@ -6,5 +6,5 @@ public interface ParasolService {
     List<Parasol> parasolList(Parasol SearchParasol);
     Parasol viewParasol(Parasol parasol);
     void editParasol(Parasol parasol);
-    String receiveParasol(Parasol parasol);
+    void receiveParasol(Parasol parasol);
 }

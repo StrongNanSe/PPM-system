@@ -1,5 +1,7 @@
 package kr.co.ppm.system.parasol;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import kr.co.ppm.system.parasolstatus.ParasolStatus;
 import kr.co.ppm.system.parasolstatus.ParasolStatusService;
 import org.apache.logging.log4j.LogManager;
@@ -72,7 +74,14 @@ public class ParasolController {
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public String receiveParasol(@RequestBody Parasol parasol) {
+        Gson code = new Gson();
 
-        return parasolService.receiveParasol(parasol);
+        JsonObject jsonObject = new JsonObject();
+        jsonObject.addProperty("code", 200);
+        jsonObject.addProperty("message", "null");
+
+        parasolService.receiveParasol(parasol);
+
+        return code.toJson(jsonObject);
     }
 }

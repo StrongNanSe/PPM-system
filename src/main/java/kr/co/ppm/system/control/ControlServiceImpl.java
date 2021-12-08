@@ -43,14 +43,19 @@ public class ControlServiceImpl implements ControlService{
                     .get()
                     .build();
 
-            try (Response response = client.newCall(request).execute()) {
+            try(Response response = client.newCall(request).execute()) {
                 responseCode = response.body().string();
+            }
+
+            if ("200".equals(responseCode.split(":")[1].split("\"")[1])) {
+                logger.info("Send Control is Success");
+            } else {
+                logger.error(responseCode.split(":")[2].split("\"")[1]);
             }
 
             logger.info(responseCode);
         } catch (Exception e) {
             logger.info("Exception Occurred in method sendControl");
-            e.printStackTrace();
         }
 
         return responseCode;
