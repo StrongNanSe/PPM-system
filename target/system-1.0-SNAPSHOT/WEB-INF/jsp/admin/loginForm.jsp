@@ -35,7 +35,7 @@
 				<section id="login-register">
 					<br><br>
 					<div class="container">
-						<div class="row">
+						<div class="row col-md-9" style="margin: auto">
 							<div class="offset-md-2 col-md-8 offset-lg-3 col-lg-6">
 								<!--LOGIN / REGISTER TABS
 									=========================================================================================-->
@@ -69,15 +69,15 @@
 												</div>
 											</div>
 											<!--Submit button-->
-											<div class="ts-center__vertical justify-content-between">
-												<!--Remember checkbox-->
-												<div class="custom-control custom-checkbox mb-0">
+											<div class="d-flex justify-content-between">
+												<!--아이디 & 비밀번호 비일치 경고문구-->
+												<div class="mr-auto p-0 custom-control custom-checkbox mb-0">
 													<c:if test="${adminMatch eq false}">
 														<p style="font-size: 1em" class="text-danger">아이디 또는 비밀번호가 일치 하지 않습니다.</p>
 													</c:if>
 												</div>
 												<!--Submit button-->
-												<button style="font-weight : 100" type="submit" class="btn btn-primary">로그인</button>
+												<button style="font-weight : 100" type="submit" class="p-2 btn btn-primary">로그인</button>
 											</div>
 											<hr>
 										</form>

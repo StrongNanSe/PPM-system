@@ -28,7 +28,9 @@ public class ParasolStatusController {
 
     @GetMapping("/{id}")
     public ModelAndView parasolStatusList(Parasol parasol) {
-        logger.debug("parasolStatusList --> " + parasol);
+        logger.debug("==========DEBUG==========");
+        logger.debug("| parasolStatusList parasol : " + parasol + " |");
+        logger.debug("=========================");
 
         ModelAndView modelAndView = new ModelAndView("parasolstatus/statuslist");
 
@@ -42,11 +44,15 @@ public class ParasolStatusController {
         String drawPage = "";
         page.setId(id);
 
-        logger.debug("page => " + page);
+        logger.debug("==========DEBUG==========");
+        logger.debug("| parasolStatusList page : " + page + " |");
+        logger.debug("=========================");
 
         Page newPage = pageUtil.setPage(id ,parasolStatusService.parasolStatusList(page).size(), page.getPageNo());
 
-        logger.debug("newPage => " + newPage);
+        logger.debug("==========DEBUG==========");
+        logger.debug("| parasolStatusList newPage : " + newPage + " |");
+        logger.debug("=========================");
 
         List<ParasolStatus> parasolStatusList = parasolStatusService.parasolStatusList(newPage);
 
@@ -61,14 +67,18 @@ public class ParasolStatusController {
 
         String status = parasolStatusService.viewParasolStatus(parasol).getStatus();
 
-        logger.debug("status -> " + status);
+        logger.debug("==========DEBUG==========");
+        logger.debug("| viewParasolStatus parasol : " + status + " |");
+        logger.debug("=========================");
 
         return status;
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public String receiveParasolStatus(@RequestBody ParasolStatus parasolStatus) {
-        logger.debug(parasolStatus);
+        logger.debug("==========DEBUG==========");
+        logger.debug("| receiveParasolStatus parasolStatus : " + parasolStatus + "|");
+        logger.debug("=========================");
 
         Gson code = new Gson();
 

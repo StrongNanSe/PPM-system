@@ -221,7 +221,7 @@
 
                             var contentString = [
                                   '<section id="basic-information" style="margin: auto; width: fit-content" class="mb-1 pl-0">'
-                                + '    <div class="mb-2 card ts-item ts-card ts-result">'
+                                + '    <div class="mb-2 card ts-item ts-card ts-result" data-toggle="tooltip" data-placement="right" title="상세 정보 보기">'
                                 + '        <a style="text-align: center; width: 100%; font-size: 1.5em" href="/parasol/' + document.getElementById("id" + i).value + '">' + document.getElementById("managementNo" + i).value + '</a>'
                                 + '    </div>'
                                 + '    <div style="text-align: center; margin: auto" class="row">'
@@ -283,8 +283,7 @@
                 indexI = index;
                 sendIdI = sendId;
 
-                document.getElementById("actionButton").setAttribute('disabled', 'disabled');
-                document.getElementById("actionButton").setAttribute('class', 'btn btn-outline-secondary btn-sm');
+                document.getElementById("actionButton").setAttribute('class', 'btn btn-outline-secondary btn-sm disabled');
                 document.getElementById("actionButton").innerText = "동작중";
 
                 actionXmlHttpRequest = new XMLHttpRequest();
@@ -328,7 +327,7 @@
                                 document.getElementById("actionButton").innerText = "펼치기";
                             }
 
-                            document.getElementById("actionButton").removeAttribute('disabled');
+                            $('#actionButton').unbind('onclick', false);
                             document.getElementById("actionButton").setAttribute('class', "btn btn-primary");
                         }
                     }

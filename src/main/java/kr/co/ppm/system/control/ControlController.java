@@ -16,7 +16,9 @@ public class ControlController {
 
     @PostMapping(value ="/{action}", consumes = MediaType.APPLICATION_JSON_VALUE)
     public String sendParasolControl(@RequestBody Parasol parasol, @PathVariable String action) {
-        logger.debug("id :" + parasol.getId() + " " + "action :" + action);
+        logger.debug("==========DEBUG==========");
+        logger.debug("| Send to ID : " + parasol.getId() + " | " + "Send Action : " + action + " |");
+        logger.debug("=========================");
 
         return controlService.sendControl(parasol, action);
     }

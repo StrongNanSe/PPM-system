@@ -31,7 +31,9 @@ public class ParasolController {
 
     @GetMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public List<Mark> parasolList(Parasol searchParasol) {
-        logger.debug("search : " + searchParasol);
+        logger.debug("==========DEBUG==========");
+        logger.debug("| parasolList searchParasol : " + searchParasol + " |");
+        logger.debug("=========================");
 
         if ("X".equals(searchParasol.getActive())) {
             searchParasol.setActive(null);
@@ -58,7 +60,9 @@ public class ParasolController {
         ModelAndView modelAndView = new ModelAndView("parasol/view");
         modelAndView.addObject("parasol", parasolService.viewParasol(parasol));
 
-        logger.debug("viewParasol --> " + parasol.toString());
+        logger.debug("==========DEBUG==========");
+        logger.debug("| viewParasol parasol : " + parasol.toString() + " |");
+        logger.debug("=========================");
 
         return modelAndView;
     }
@@ -69,7 +73,9 @@ public class ParasolController {
         ModelAndView modelAndView  = new ModelAndView(new RedirectView("/parasol/" + parasol.getId()));
         parasolService.editParasol(parasol);
 
-        logger.debug(parasol.toString());
+        logger.debug("==========DEBUG==========");
+        logger.debug("| editParasol parasol : " + parasol + " |");
+        logger.debug("=========================");
 
         return modelAndView;
     }

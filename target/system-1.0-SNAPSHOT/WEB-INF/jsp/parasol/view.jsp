@@ -55,12 +55,12 @@
                                                     <label class="badge badge-light p-2" style="text-align: center; font-size: 1.3em; font-weight: 500; width: 55px">활성</label>
                                                     <c:choose>
                                                         <c:when test="${parasol.active == 'Y'}">
-                                                            <h3 class="p-2" style="margin: auto">
-                                                                <button type="button" class="card ts-item ts-card ts-result border text-primary" style="font-size: 1.5em" title="활성상태 변경 버튼" data-toggle="modal" data-placement="Tooltip on right" data-target="#activeCenter">${parasol.active}</button>
+                                                            <h3 class="p-2" style="margin: auto" data-toggle="tooltip" data-placement="right" title="상태 변경 : 비활성 버튼">
+                                                                <button type="button" class="card ts-item ts-card ts-result border text-primary" style="font-size: 1.5em" data-toggle="modal" data-target="#activeCenter">${parasol.active}</button>
                                                         </c:when>
                                                         <c:otherwise>
-                                                            <h3 class="p-2" style="margin: auto">
-                                                                <button type="button" class="card ts-item ts-card ts-result border text-danger" style="font-size: 1.5em" title="활성상태 변경 버튼"  data-toggle="modal" data-placement="Tooltip on right" data-target="#activeCenter">${parasol.active}</button>
+                                                            <h3 class="p-2" style="margin: auto" data-toggle="tooltip" data-placement="right" title="상태 변경 : 활성 버튼">
+                                                                <button type="button" class="card ts-item ts-card ts-result border text-danger" style="font-size: 1.5em" data-toggle="modal" data-target="#activeCenter">${parasol.active}</button>
                                                         </c:otherwise>
                                                     </c:choose>
                                                     </h3>
@@ -94,8 +94,8 @@
                                                 </div>
                                                 <div class="col-sm-auto">
                                                     <label class="badge badge-light" style="font-size: 1.3em; font-weight: 500">설치주소</label>
-                                                    <button type="button" class="card ts-item ts-card ts-result border" title="설치주소 변경 버튼" data-placement="Tooltip on bottom" data-toggle="modal" data-toggle="tooltip" data-target="#modalCenter">
-                                                        <p style="font-size: 1.5em">${parasol.installAddress}</p>
+                                                    <button type="button" class="card ts-item ts-card ts-result border"  data-toggle="modal" data-target="#modalCenter">
+                                                        <p style="font-size: 1.5em" title="설치주소 변경 버튼" data-toggle="tooltip" data-placement="bottom">${parasol.installAddress}</p>
                                                     </button>
                                                 </div>
                                                 <!--주소 수정 모달-->

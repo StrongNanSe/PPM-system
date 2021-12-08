@@ -11,12 +11,12 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 @RestController
 public class AdminController {
     @Autowired
     private AdminService adminService;
-    private Logger logger = LogManager.getLogger(AdminController.class);
     private boolean adminMatch = true;
 
     @GetMapping("/login")
@@ -32,8 +32,7 @@ public class AdminController {
     }
 
     @PostMapping("/login")
-    public ModelAndView login(Admin admin, Errors errors, HttpSession session) {
-        new LoginValidator().validate(admin, errors);
+    public ModelAndView login(@Valid Admin admin, Errors errors, HttpSession session) {
         ModelAndView modelAndView = new ModelAndView(new RedirectView("/login"));
 
         if (adminMatch = !errors.hasErrors()){

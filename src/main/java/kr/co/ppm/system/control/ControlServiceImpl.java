@@ -29,9 +29,13 @@ public class ControlServiceImpl implements ControlService{
 
         actionList.put(controlParasol.getId(), action);
 
-        String url = "http://" + "172.16.31.108:8080" + "/device/" + action;
+        String agentIpAddress = parasolMapper.selectById(parasol).getAgentIpAddress();
 
-        logger.info("this is url : " + url);
+        String url = "http://" + agentIpAddress + "/device/" + action;
+
+        logger.info("----------INFO----------");
+        logger.info("| Send This is URL : " + url + " |");
+        logger.info("------------------------");
 
         String responseCode = null;
 
@@ -44,18 +48,28 @@ public class ControlServiceImpl implements ControlService{
                     .build();
 
             try(Response response = client.newCall(request).execute()) {
-                responseCode = response.body().string();
+                responseCode = response.body() != null
+                        ? response.body().toString()
+                        : null;
             }
 
             if ("200".equals(responseCode.split(":")[1].split("\"")[1])) {
-                logger.info("Send Control is Success");
+                logger.info("----------INFO----------");
+                logger.info("| Send Control is Success |");
+                logger.info("-------------------------");
             } else {
-                logger.error(responseCode.split(":")[2].split("\"")[1]);
+                logger.error("**********ERROR**********");
+                logger.error("* " + responseCode.split(":")[2].split("\"")[1] + " *");
+                logger.error("*************************");
             }
 
-            logger.info(responseCode);
+            logger.info("----------INFO----------");
+            logger.info("| " + responseCode + " |");
+            logger.info("------------------------");
         } catch (Exception e) {
-            logger.info("Exception Occurred in method sendControl");
+            logger.info("----------INFO----------");
+            logger.info("| Exception Occurred in method sendControl |");
+            logger.info("------------------------");
         }
 
         return responseCode;

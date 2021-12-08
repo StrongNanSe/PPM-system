@@ -15,13 +15,13 @@
     <mvc:annotation-driven />
     <mvc:default-servlet-handler />
 
-<!--    <mvc:interceptors>-->
-<!--        <mvc:interceptor>-->
-<!--            <mvc:mapping path="/**" />-->
-<!--            <mvc:exclude-mapping path="/login"/>-->
-<!--            <bean class="kr.co.ppm.system.admin.SessionInterceptor" />-->
-<!--        </mvc:interceptor>-->
-<!--    </mvc:interceptors>-->
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/**" />
+            <mvc:exclude-mapping path="/login"/>
+            <bean class="kr.co.ppm.system.admin.SessionInterceptor" />
+        </mvc:interceptor>
+    </mvc:interceptors>
 
     <bean id="viewResolver"
           class="org.springframework.web.servlet.view.InternalResourceViewResolver">

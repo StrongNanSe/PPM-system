@@ -1,9 +1,16 @@
 package kr.co.ppm.system.admin;
 
+import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.NotEmpty;
+
 import java.io.Serializable;
 
 public class Admin implements Serializable {
+    @NotBlank
+    @NotEmpty
     private String id;
+    @NotBlank
+    @NotEmpty
     private String password;
 
     public Admin() {
