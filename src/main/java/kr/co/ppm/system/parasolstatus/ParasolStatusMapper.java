@@ -5,7 +5,6 @@ import kr.co.ppm.system.util.Page;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
-import java.util.Map;
 
 @Mapper
 public interface ParasolStatusMapper {

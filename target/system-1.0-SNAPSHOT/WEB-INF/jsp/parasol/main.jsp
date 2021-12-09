@@ -295,10 +295,6 @@
                 }
                 actionXmlHttpRequest.setRequestHeader("Content-Type","application/json;charset=UTF-8");
 
-                actionXmlHttpRequest.ontimeout = function () {
-                    actionXmlHttpRequest.send('{"id" : "' + sendId + '"}');
-                }
-
                 actionXmlHttpRequest.send('{"id" : "' + sendId + '"}');
                 actionXmlHttpRequest.onreadystatechange = responseBysendAction;
             }

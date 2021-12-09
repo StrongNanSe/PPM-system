@@ -4,17 +4,15 @@ package kr.co.ppm.system.control;
 import kr.co.ppm.system.parasol.Parasol;
 import kr.co.ppm.system.parasol.ParasolMapper;
 import kr.co.ppm.system.parasolstatus.ParasolStatus;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
+import okhttp3.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.io.IOException;
 import java.util.Hashtable;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 @Service
 public class ControlServiceImpl implements ControlService{
@@ -34,13 +32,16 @@ public class ControlServiceImpl implements ControlService{
         String url = "http://" + agentIpAddress + "/device/" + action;
 
         logger.info("----------INFO----------");
-        logger.info("| Send This is URL : " + url + " |");
+        logger.info("| Send This URL : " + url + " |");
         logger.info("------------------------");
 
         String responseCode = null;
 
         try{
-            OkHttpClient client = new OkHttpClient();
+            OkHttpClient client = new OkHttpClient()
+                    .newBuilder()
+                    .readTimeout(1, TimeUnit.MINUTES)
+                    .build();
 
             Request request = new Request.Builder()
                     .url(url)
@@ -49,9 +50,11 @@ public class ControlServiceImpl implements ControlService{
 
             try(Response response = client.newCall(request).execute()) {
                 responseCode = response.body() != null
-                        ? response.body().toString()
+                        ? response.body().string()
                         : null;
             }
+
+            logger.debug(responseCode);
 
             if ("200".equals(responseCode.split(":")[1].split("\"")[1])) {
                 logger.info("----------INFO----------");
@@ -70,6 +73,7 @@ public class ControlServiceImpl implements ControlService{
             logger.info("----------INFO----------");
             logger.info("| Exception Occurred in method sendControl |");
             logger.info("------------------------");
+            e.printStackTrace();
         }
 
         return responseCode;

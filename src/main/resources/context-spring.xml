@@ -19,6 +19,7 @@
         <mvc:interceptor>
             <mvc:mapping path="/**" />
             <mvc:exclude-mapping path="/login"/>
+            <mvc:exclude-mapping path="/status"/>
             <bean class="kr.co.ppm.system.admin.SessionInterceptor" />
         </mvc:interceptor>
     </mvc:interceptors>

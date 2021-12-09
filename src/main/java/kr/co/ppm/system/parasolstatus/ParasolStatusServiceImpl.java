@@ -1,7 +1,5 @@
 package kr.co.ppm.system.parasolstatus;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonObject;
 import kr.co.ppm.system.parasol.Parasol;
 import kr.co.ppm.system.parasol.ParasolMapper;
 import kr.co.ppm.system.util.Page;
@@ -11,9 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @Service
 public class ParasolStatusServiceImpl implements ParasolStatusService {
@@ -44,7 +40,7 @@ public class ParasolStatusServiceImpl implements ParasolStatusService {
     @Override
     public void receiveParasolStatus(ParasolStatus parasolStatus) {
         if (parasolMapper.selectById(new Parasol(parasolStatus.getParasolId())) != null) {
-            logger.debug("<-- receiveParasolStatus --> ");
+            logger.debug("<-- receiveParasolStatus -->");
 
             parasolStatusMapper.insert(parasolStatus);
         }
