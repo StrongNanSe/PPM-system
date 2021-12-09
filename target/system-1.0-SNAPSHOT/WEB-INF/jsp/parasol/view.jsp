@@ -109,7 +109,7 @@
                                                                 </button>
                                                             </div>
                                                             <div class="modal-body">
-                                                                <input type="text" class="form-control" id="editAddressText" value="${parasol.installAddress}"/>
+                                                                <input type="text" class="form-control" id="editAddressText" value="${parasol.installAddress}" />
                                                             </div>
                                                             <div class="modal-footer">
                                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>

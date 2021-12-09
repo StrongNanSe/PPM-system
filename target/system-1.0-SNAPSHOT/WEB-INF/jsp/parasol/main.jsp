@@ -59,7 +59,7 @@
                             <div class="ts-form mb-0 d-flex flex-column flex-sm-row py-2 pl-2 pr-3">
                                 <!--Keyword-->
                                 <div class="form-group m-1 w-100">
-                                    <input type="text" class="form-control" id="keyword" name="managementNo" placeholder="관리번호">
+                                    <input type="text" class="form-control" id="keyword" name="managementNo" placeholder="관리번호" />
                                 </div>
                                 <!--Category-->
                                 <div class="form-group m-1 w-100">

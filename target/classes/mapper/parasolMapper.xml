@@ -73,7 +73,14 @@
                 , ACTIVE
         FROM PARASOL
         <where>
-            ID = #{id};
+            <choose>
+                <when test="id != null">
+                    ID = #{id}
+                </when>
+                <otherwise>
+                    ID = null
+                </otherwise>
+            </choose>
         </where>
     </select>
 
@@ -85,13 +92,20 @@
                 <when test="active != null">
                     ACTIVE = #{active}
                 </when>
-                <otherwise>
+                <when test="installAddress != null">
                     INSTALL_ADDRESS = #{installAddress}
-                </otherwise>
+                </when>
             </choose>
         </set>
         <where>
-            ID = #{id};
+            <choose>
+                <when test="id != null">
+                    ID = #{id}
+                </when>
+                <otherwise>
+                    ID = null
+                </otherwise>
+            </choose>
         </where>
     </update>
 </mapper>

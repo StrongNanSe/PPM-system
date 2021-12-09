@@ -29,7 +29,7 @@
 			<!-- MAIN ***************************************************************************************************-->
 			<!--*********************************************************************************************************-->
 			<main id="ts-main">
-				<section id="breadcrumb" /></section>
+				<section id="breadcrumb"></section>
 				<!--LOGIN / REGISTER SECTION
 					=========================================================================================================-->
 				<section id="login-register">
@@ -57,11 +57,11 @@
 										<form action="/login" method="post" class="ts-form" id="form-login">
 											<!--Id-->
 											<div class="form-group">
-												<input type="text"  class="form-control" id="login-email" name="id" placeholder="아이디" required="">
+												<input type="text"  class="form-control" id="login-email" name="id" placeholder="아이디" required="" />
 											</div>
 											<!--Password-->
 											<div class="input-group ts-has-password-toggle">
-												<input type="password" class="form-control border-right-0" name="password" placeholder="비밀번호" required="">
+												<input type="password" class="form-control border-right-0" name="password" placeholder="비밀번호" required="" />
 												<div class="input-group-append">
 													<a href="#" class="input-group-text bg-white border-left-0 ts-password-toggle">
 														<i class="fa fa-eye"></i>
