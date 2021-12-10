@@ -242,7 +242,7 @@
                                 + '            <p>' + document.getElementById("dateTime" + i).value + '</p>'
                                 + '        </div>'
                                 + '        <div class="col-sm-12 mb-1">'
-                                + '           <a href="javascript:void(0);" id="actionButton" onclick="sendAction(document.getElementById(`id' + i + '`).value, document.getElementById(`action' + i + '`).value, ' + i + ');" class="btn btn-primary">' + statusKr + '</a>'
+                                + '           <a href="javascript:void(0);" id="actionButton' + i + '" onclick="sendAction(document.getElementById(`id' + i + '`).value, document.getElementById(`action' + i + '`).value, ' + i + ');" class="btn btn-primary">' + statusKr + '</a>'
                                 + '        </div>'
                                 + '    </div>'
                                 + '</section>'
@@ -283,8 +283,8 @@
                 indexI = index;
                 sendIdI = sendId;
 
-                document.getElementById("actionButton").setAttribute('class', 'btn btn-outline-secondary btn-sm disabled');
-                document.getElementById("actionButton").innerText = "동작중";
+                document.getElementById("actionButton" + indexI).setAttribute('class', 'btn btn-outline-secondary btn-sm disabled');
+                document.getElementById("actionButton" + indexI).innerText = "동작중";
 
                 actionXmlHttpRequest = new XMLHttpRequest();
 
@@ -317,14 +317,13 @@
 
                             if (status == "펼침") {
                                 document.getElementById("action" + indexI).setAttribute('value', "F");
-                                document.getElementById("actionButton").innerText = "접기";
+                                document.getElementById("actionButton" + indexI).innerText = "접기";
                             } else {
                                 document.getElementById("action" + indexI).setAttribute('value', "U");
-                                document.getElementById("actionButton").innerText = "펼치기";
+                                document.getElementById("actionButton" + indexI).innerText = "펼치기";
                             }
 
-                            $('#actionButton').unbind('onclick', false);
-                            document.getElementById("actionButton").setAttribute('class', "btn btn-primary");
+                            document.getElementById("actionButton" + indexI).setAttribute('class', "btn btn-primary");
                         }
                     }
                 }
