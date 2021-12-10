@@ -80,7 +80,7 @@ public class ParasolController {
         return modelAndView;
     }
 
-    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/info", consumes = MediaType.APPLICATION_JSON_VALUE)
     public String receiveParasol(@RequestBody Parasol parasol) {
         Gson code = new Gson();
 

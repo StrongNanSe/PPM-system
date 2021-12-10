@@ -20,6 +20,7 @@
             <mvc:mapping path="/**" />
             <mvc:exclude-mapping path="/login"/>
             <mvc:exclude-mapping path="/status"/>
+            <mvc:exclude-mapping path="/parasol/info"/>
             <bean class="kr.co.ppm.system.admin.SessionInterceptor" />
         </mvc:interceptor>
     </mvc:interceptors>
