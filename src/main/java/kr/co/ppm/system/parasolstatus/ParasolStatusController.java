@@ -61,17 +61,17 @@ public class ParasolStatusController {
         return drawPage;
     }
 
-    @GetMapping(value="/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = "application/text;charset=UTF-8")
-    public String viewParasolStatus(Parasol parasol) {
+    @GetMapping(value="/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ParasolStatus viewParasolStatus(Parasol parasol) {
         logger.debug(parasol);
 
-        String status = parasolStatusService.viewParasolStatus(parasol).getStatus();
+        ParasolStatus newStatus = parasolStatusService.viewParasolStatus(parasol);
 
         logger.debug("==========DEBUG==========");
-        logger.debug("| viewParasolStatus parasol : " + status + " |");
+        logger.debug("| viewParasolStatus parasolStatus : " + newStatus + " |");
         logger.debug("=========================");
 
-        return status;
+        return newStatus;
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)

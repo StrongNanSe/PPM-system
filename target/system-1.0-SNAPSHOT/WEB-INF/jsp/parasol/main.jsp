@@ -220,7 +220,8 @@
                             });
 
                             var contentString = [
-                                  '<section id="basic-information" style="margin: auto; width: fit-content" class="mb-1 pl-0">'
+                                  '<section style="margin: auto; width: fit-content" class="mb-1 pl-0">'
+                                + '    <input type="hidden" id="contentString" value="' + i + '" />'
                                 + '    <div class="mb-2 card ts-item ts-card ts-result" data-toggle="tooltip" data-placement="right" title="상세 정보 보기">'
                                 + '        <a style="text-align: center; width: 100%; font-size: 1.5em" href="/parasol/' + document.getElementById("id" + i).value + '">' + document.getElementById("managementNo" + i).value + '</a>'
                                 + '    </div>'
@@ -231,15 +232,15 @@
                                 + '        </div>'
                                 + '        <div class="col-sm-4">'
                                 + '            <label>상태</label>'
-                                + '            <p>' + document.getElementById("status" + i).value + '</p>'
+                                + '            <p id="infoStatus' + i + '">' + document.getElementById("status" + i).value + '</p>'
                                 + '        </div>'
                                 + '        <div class="col-sm-4">'
                                 + '            <label>온도</label>'
-                                + '            <p>' + document.getElementById("temperature" + i).value + '℃</p>'
+                                + '            <p id="infoTemperature' + i + '">' + document.getElementById("temperature" + i).value + '℃</p>'
                                 + '        </div>'
                                 + '        <div class="col-sm-12 mb-0 mb-sm-0 btn-sm d-block d-sm-inline-block">'
                                 + '            <label>일시</label>'
-                                + '            <p>' + document.getElementById("dateTime" + i).value + '</p>'
+                                + '            <p id="infoDateTime' + i + '">' + document.getElementById("dateTime" + i).value + '</p>'
                                 + '        </div>'
                                 + '        <div class="col-sm-12 mb-1">'
                                 + '           <a href="javascript:void(0);" id="actionButton' + i + '" onclick="sendAction(document.getElementById(`id' + i + '`).value, document.getElementById(`action' + i + '`).value, ' + i + ');" class="btn btn-primary">' + statusKr + '</a>'
@@ -281,7 +282,6 @@
 
             function sendAction(sendId, action, index) {
                 indexI = index;
-                sendIdI = sendId;
 
                 document.getElementById("actionButton" + indexI).setAttribute('class', 'btn btn-outline-secondary btn-sm disabled');
                 document.getElementById("actionButton" + indexI).innerText = "동작중";
@@ -303,30 +303,44 @@
                 if (actionXmlHttpRequest.readyState == 4 && actionXmlHttpRequest.status == 200) {
                     code = JSON.parse(actionXmlHttpRequest.responseText);
                     console.log(code);
+                }
 
-                    StatusXmlHttpRequest = new XMLHttpRequest();
-                    StatusXmlHttpRequest.open("GET", "/status/" + sendIdI, true);
-                    StatusXmlHttpRequest.setRequestHeader("Content-Type","application/json;charset=UTF-8");
-                    StatusXmlHttpRequest.send();
-                    StatusXmlHttpRequest.onreadystatechange = function () {
-                        if (StatusXmlHttpRequest.readyState == 4 && StatusXmlHttpRequest.status == 200) {
-                            status = StatusXmlHttpRequest.responseText;
-                            console.log(status);
+                if (document.getElementById("contentString").value == indexI) {
+                    receiveStatus(indexI);
+                }
+            }
 
-                            document.getElementById("status" + indexI).setAttribute('value', status);
+            function receiveStatus(indexI) {
+                StatusXmlHttpRequest = new XMLHttpRequest();
+                StatusXmlHttpRequest.open("GET", "/status/" + document.getElementById("id" + indexI).value, true);
+                StatusXmlHttpRequest.setRequestHeader("Content-Type","application/json;charset=UTF-8");
+                StatusXmlHttpRequest.send();
+                StatusXmlHttpRequest.onreadystatechange = function () {
+                    if (StatusXmlHttpRequest.readyState == 4 && StatusXmlHttpRequest.status == 200) {
+                        parasolStatus = JSON.parse(StatusXmlHttpRequest.responseText);
 
-                            if (status == "펼침") {
-                                document.getElementById("action" + indexI).setAttribute('value', "F");
-                                document.getElementById("actionButton" + indexI).innerText = "접기";
-                            } else {
-                                document.getElementById("action" + indexI).setAttribute('value', "U");
-                                document.getElementById("actionButton" + indexI).innerText = "펼치기";
-                            }
-
-                            document.getElementById("actionButton" + indexI).setAttribute('class', "btn btn-primary");
-                        }
+                        shiftElement(parasolStatus, indexI);
                     }
                 }
+            }
+
+            function shiftElement(parasolStatus, indexI) {
+                document.getElementById("status" + indexI).setAttribute('value', parasolStatus.status);
+                document.getElementById("temperature" + indexI).setAttribute('value', parasolStatus.temperature);
+                document.getElementById("dateTime" + indexI).setAttribute('value', parasolStatus.dateTime);
+                document.getElementById("infoStatus" + indexI).innerText = parasolStatus.status;
+                document.getElementById("infoTemperature" + indexI).innerText = parasolStatus.temperature;
+                document.getElementById("infoDateTime" + indexI).innerText = parasolStatus.dateTime;
+
+                if (parasolStatus.status == "펼침") {
+                    document.getElementById("action" + indexI).setAttribute('value', "F");
+                    document.getElementById("actionButton" + indexI).innerText = "접기";
+                } else {
+                    document.getElementById("action" + indexI).setAttribute('value', "U");
+                    document.getElementById("actionButton" + indexI).innerText = "펼치기";
+                }
+
+                document.getElementById("actionButton" + indexI).setAttribute('class', "btn btn-primary");
             }
 
             function markerClick(index) {
@@ -343,6 +357,8 @@
                     if (infowindows[index].getMap()) {
                         infowindows[index].close();
                     } else {
+                        receiveStatus(index);
+
                         infowindows[index].open(map, markers[index]);
                     }
                 }
@@ -359,11 +375,13 @@
                 }
 
                 markers[index].setAnimation(naver.maps.Animation.BOUNCE);
+
+                receiveStatus(index);
+
                 infowindows[index].open(map, markers[index]);
             }
 
             document.getElementById("search-btn").addEventListener("click", search, false);
-            document.getElementById("")
         </script>
 
         <%@ include file="/WEB-INF/jsp/include/bottom.jsp" %>
