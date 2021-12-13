@@ -4,8 +4,8 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import kr.co.ppm.system.control.ControlService;
 import kr.co.ppm.system.parasol.Parasol;
-import kr.co.ppm.system.util.Page;
-import kr.co.ppm.system.util.PageUtil;
+import kr.co.ppm.system.page.Page;
+import kr.co.ppm.system.page.PageUtil;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +27,7 @@ public class ParasolStatusController {
     private Logger logger = LogManager.getLogger(ParasolStatusController.class);
 
     @GetMapping("/{id}")
-    public ModelAndView parasolStatusList(Parasol parasol) {
+    public ModelAndView viewParasolStatusList(Parasol parasol) {
         logger.debug("==========DEBUG==========");
         logger.debug("| parasolStatusList parasol : " + parasol + " |");
         logger.debug("=========================");
@@ -40,7 +40,7 @@ public class ParasolStatusController {
     }
 
     @PostMapping(value ="/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = "application/text;charset=UTF-8")
-    public String parasolStatusList(@PathVariable String id, @RequestBody Page page) {
+    public String viewParasolStatusList(@PathVariable String id, @RequestBody Page page) {
         String drawPage = "";
         page.setId(id);
 
@@ -48,13 +48,13 @@ public class ParasolStatusController {
         logger.debug("| parasolStatusList page : " + page + " |");
         logger.debug("=========================");
 
-        Page newPage = pageUtil.setPage(id ,parasolStatusService.parasolStatusList(page).size(), page.getPageNo());
+        Page newPage = pageUtil.setPage(id ,parasolStatusService.viewParasolStatusList(page).size(), page.getPageNo());
 
         logger.debug("==========DEBUG==========");
         logger.debug("| parasolStatusList newPage : " + newPage + " |");
         logger.debug("=========================");
 
-        List<ParasolStatus> parasolStatusList = parasolStatusService.parasolStatusList(newPage);
+        List<ParasolStatus> parasolStatusList = parasolStatusService.viewParasolStatusList(newPage);
 
         drawPage = pageUtil.drawPage(newPage, parasolStatusList);
 

@@ -1,7 +1,7 @@
 package kr.co.ppm.system.parasolstatus;
 
 import kr.co.ppm.system.parasol.Parasol;
-import kr.co.ppm.system.util.Page;
+import kr.co.ppm.system.page.Page;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;

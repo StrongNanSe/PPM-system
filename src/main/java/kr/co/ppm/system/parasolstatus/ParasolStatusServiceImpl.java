@@ -2,7 +2,7 @@ package kr.co.ppm.system.parasolstatus;
 
 import kr.co.ppm.system.parasol.Parasol;
 import kr.co.ppm.system.parasol.ParasolMapper;
-import kr.co.ppm.system.util.Page;
+import kr.co.ppm.system.page.Page;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +20,7 @@ public class ParasolStatusServiceImpl implements ParasolStatusService {
     private Logger logger = LogManager.getLogger(ParasolStatusServiceImpl.class);
 
     @Override
-    public List<ParasolStatus> parasolStatusList(Page page) {
+    public List<ParasolStatus> viewParasolStatusList(Page page) {
         List<ParasolStatus> parasolStatusList = parasolStatusMapper.selectAllByRownum(page);
 
         return parasolStatusList != null

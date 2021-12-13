@@ -26,7 +26,7 @@
                  , NOW()
                  , #{installAddress}
                  , #{latitude}
-                 , #{latitude}
+                 , #{longitude}
                  , #{agentIpAddress}
                  , 'Y')
     </insert>

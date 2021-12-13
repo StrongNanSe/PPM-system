@@ -12,7 +12,7 @@ public class ParasolServiceImpl implements ParasolService {
     private ParasolMapper parasolMapper;
 
     @Override
-    public List<Parasol> parasolList(Parasol searchParasol) {
+    public List<Parasol> viewParasolList(Parasol searchParasol) {
         List<Parasol> parasolList = parasolMapper.selectAll(searchParasol);
 
         return parasolList != null

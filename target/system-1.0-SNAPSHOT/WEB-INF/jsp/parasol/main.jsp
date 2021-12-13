@@ -4,7 +4,7 @@
 <html>
     <head>
         <%@ include file="/WEB-INF/jsp/include/head.jsp" %>
-        <script src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=mpvl2mrnbq"></script>
+        <script src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=${ncpClientId}"></script>
 
         <title>공공 파라솔 관리 시스템 - 메인</title>
     </head>

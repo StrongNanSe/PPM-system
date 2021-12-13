@@ -1,4 +1,4 @@
-package kr.co.ppm.system.util;
+package kr.co.ppm.system.page;
 
 import kr.co.ppm.system.parasolstatus.ParasolStatus;
 import org.springframework.stereotype.Component;

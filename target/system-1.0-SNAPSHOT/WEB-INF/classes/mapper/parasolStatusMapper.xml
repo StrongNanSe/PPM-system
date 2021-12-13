@@ -28,7 +28,7 @@
     </insert>
 
     <select id="selectAllByRownum"
-            parameterType="kr.co.ppm.system.util.Page"
+            parameterType="kr.co.ppm.system.page.Page"
             resultMap="parasolStatusResultMap">
         SELECT @ROWNUM:=@ROWNUM+1 AS RN
                 , STATUS
