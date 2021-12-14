@@ -13,9 +13,7 @@ public class Mark implements Serializable {
     private int temperature;
     private String dateTime;
 
-    public Mark() {
-
-    }
+    public Mark() {}
 
     public Mark(String id, String managementNo, double latitude, double longitude, String agentIpAddress,
                 String active, String status, int temperature, String dateTime) {

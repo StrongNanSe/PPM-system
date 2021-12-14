@@ -9,16 +9,9 @@
         <title>공공 파라소 관리 시스템 - 상세 정보</title>
     </head>
     <body style="font-family: 'Noto Sans KR', sans-serif;">
-        <!-- WRAPPER
-            =================================================================================================================-->
         <div class="ts-page-wrapper ts-has-bokeh-bg" id="page-top">
             <%@ include file="/WEB-INF/jsp/include/header.jsp"%>
-            <!--*********************************************************************************************************-->
-            <!-- MAIN ***************************************************************************************************-->
-            <!--*********************************************************************************************************-->
             <main id="ts-main">
-                <!--PAGE TITLE
-                    =========================================================================================================-->
                 <section id="page-title">
                     <div class="container">
                         <div class="ts-title mb-0">
@@ -33,19 +26,13 @@
                         </div>
                     </div>
                 </section>
-                <!--AGENT INFO
-                    =========================================================================================================-->
                 <section id="agent-info">
                     <div class="container col-md-9">
-                        <!--Box-->
                         <div class="ts-box col-md-auto">
-                            <!--Row-->
                             <div class="row col-md-auto">
-                                <!--Description-->
                                 <div class="col-md-12">
                                     <div class="py-2 col-md-12">
                                         <section id="basic-information" class="mb-0 pl-3">
-                                            <!--Title-->
                                             <div class="row">
                                                 <div class="ts-title mb-2 col-sm-10">
                                                     <label class="badge badge-light" style="font-size: 1.3em; font-weight: 500">관리번호</label>
@@ -66,14 +53,11 @@
                                                     </h3>
                                                 </div>
                                             </div>
-                                            <!--Row-->
                                             <div class="row">
-                                                <!--관리기관-->
                                                 <div class="col-sm-4">
                                                     <label class="badge badge-light" style="font-size: 1.3em; font-weight: 500">관리기관</label>
                                                     <p style="font-size: 1.5em">${parasol.managementAgency}</p>
                                                 </div>
-                                                <!--설치일자-->
                                                 <div class="col-sm-4">
                                                     <label class="badge badge-light" style="font-size: 1.3em; font-weight: 500">설치일자</label>
                                                     <p style="font-size: 1.5em">${parasol.installDate}</p>
@@ -82,12 +66,10 @@
                                                     <label class="badge badge-light" style="font-size: 1.3em; font-weight: 500">에이전트 IP 주소</label>
                                                     <p style="font-size: 1.5em">${parasol.agentIpAddress}</p>
                                                 </div>
-                                                <!--위도-->
                                                 <div class="col-sm-4">
                                                     <label class="badge badge-light" style="font-size: 1.3em; font-weight: 500">위도</label>
                                                     <p style="font-size: 1.5em">${parasol.latitude}</p>
                                                 </div>
-                                                <!--경도-->
                                                 <div class="col-sm-4">
                                                     <label class="badge badge-light" style="font-size: 1.3em; font-weight: 500">경도</label>
                                                     <p style="font-size: 1.5em">${parasol.longitude}</p>
@@ -98,7 +80,6 @@
                                                         <p style="font-size: 1.5em" title="설치주소 변경 버튼" data-toggle="tooltip" data-placement="bottom">${parasol.installAddress}</p>
                                                     </button>
                                                 </div>
-                                                <!--주소 수정 모달-->
                                                 <div class="modal fade" id="modalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                                     <div class="modal-dialog modal-dialog-centered" role="document">
                                                         <div class="modal-content">
@@ -133,7 +114,6 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <!--활성 변경 모달-->
                                                 <div class="modal fade" id="activeCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                                     <div class="modal-dialog modal-dialog-centered" role="document">
                                                         <div class="modal-content">
@@ -160,28 +140,16 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <!--end col-md-4-->
-                                                <!--Type Select-->
                                             </div>
-                                            <!--end row-->
                                         </section>
-                                        <!--end basic-info-->
                                     </div>
-                                    <!--end py-4-->
                                 </div>
-                                <!--end Description-->
                             </div>
-                            <!--end Row-->
                         </div>
-                        <!--end tx-box-->
                     </div>
-                    <!--end container-->
                 </section>
-                <!--end #agent-info-->
             </main>
-            <!--end #ts-main-->
         </div>
-        <!--end page-->
 
         <script>
             document.getElementById("editAddressButton").addEventListener("click", editAddress, false);

@@ -9,59 +9,35 @@
         <title>공공 파라솔 관리 시스템 - 메인</title>
     </head>
     <body style="font-family: 'Noto Sans KR', sans-serif;">
-        <!-- WRAPPER
-        =====================================================================================================================-->
         <div class="ts-page-wrapper ts-homepage ts-full-screen-page" id="page-top">
-            <!--HEADER **************************************************************************************************-->
             <header id="ts-header" class="navbar-dark">
-                <!--PRIMARY NAVIGATION
-                =============================================================================================================-->
                 <nav id="ts-primary-navigation" class="navbar navbar-expand-md navbar-light">
                     <div class="container">
-                        <!--Brand Logo-->
                         <p style="font-size: 2.5em; font-weight : 700; color: white" >공공 파라솔 관리 시스템</p>
-                        <!--Collapsing Navigation-->
                         <div class="collapse navbar-collapse" id="navbarPrimary">
-                            <!--RIGHT NAVIGATION MAIN LEVEL
-                            =================================================================================================-->
                             <ul class="navbar-nav ml-auto">
-                                <!--LOGOUT (Main level)
-                                =============================================================================================-->
                                 <li class="nav-item">
                                     <a class="btn btn-outline-secondary btn-sm d-block d-sm-inline-block mb-2 mb-sm-0" style="font-size: 1.5em" href="/logout">로그아웃</a>
                                 </li>
                             </ul>
-                            <!--end Right navigation-->
                         </div>
-                        <!--end navbar-collapse-->
                     </div>
-                    <!--end container-->
                 </nav>
-                <!--end #ts-primary-navigation.navbar-->
             </header>
-            <!-- HERO MAP
-            =================================================================================================================-->
             <section id="ts-hero" class=" mb-0">
-                <!--Fullscreen mode-->
                 <div class="ts-full-screen d-flex flex-column">
-                    <!-- FORM
-                    =========================================================================================================-->
                     <section class="ts-shadow__sm ts-z-index__2 ts-bg-light">
-                        <!--Collapse Button-->
                         <div class="position-absolute w-100 ts-bottom__0 ts-z-index__1 text-center ts-h-0">
                             <button type="button" class="ts-circle p-3 bg-white ts-shadow__sm border-0 ts-push-up__50 mt-2" data-toggle="collapse" data-target="#form-collapse">
                                 <i class="fa fa-chevron-up ts-text-color-primary ts-visible-on-uncollapsed"></i>
                                 <i class="fa fa-chevron-down ts-text-color-primary ts-visible-on-collapsed"></i>
                             </button>
                         </div>
-                        <!--검색-->
                         <div id="form-collapse" class="collapse ts-xs-hide-collapse show">
                             <div class="ts-form mb-0 d-flex flex-column flex-sm-row py-2 pl-2 pr-3">
-                                <!--Keyword-->
                                 <div class="form-group m-1 w-100">
                                     <input type="text" class="form-control" id="keyword" name="managementNo" placeholder="관리번호" />
                                 </div>
-                                <!--Category-->
                                 <div class="form-group m-1 w-100">
                                     <select class="custom-select" id="type" name="active">
                                         <option value="X">전체</option>
@@ -69,42 +45,27 @@
                                         <option value="N">비활성</option>
                                     </select>
                                 </div>
-                                <!--Submit button-->
                                 <div class="form-group m-1 ml-auto">
                                     <button type="button" class="btn btn-primary" id="search-btn">검색</button>
                                 </div>
                             </div>
                         </div>
-                        <!--end Form-->
                     </section>
-                    <!--end ts-form__grid-->
-                    <!-- RESULTS & MAP
-                    =========================================================================================================-->
                     <div class="d-flex h-100">
-                        <!-- RESULTS LEFT
-                        =====================================================================================================-->
                         <div class="ts-results__vertical ts-results__vertical-list ts-shadow__sm scrollbar-inner bg-white">
-                            <!--Results wrapper-->
                             <section id="ts-results">
                                 <div id="drawResult"  class="ts-results-wrapper"></div>
                             </section>
                         </div>
-                        <!--end ts-results-vertical-->
-                        <!-- MAP
-                        =====================================================================================================-->
                         <div class="ts-map w-100">
                             <div class="ts-map w-100">
                                 <div id="map" class="h-100"></div>
                             </div>
                         </div>
                     </div>
-                    <!--end d-flex h-100-->
                 </div>
-                <!--end full-screen-->
             </section>
-            <!--end ts-hero-->
         </div>
-        <!--end page-->
         <script>
             search();
 

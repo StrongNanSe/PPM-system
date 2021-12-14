@@ -36,7 +36,14 @@
                 , DATE_TIME
         FROM PARASOL_STATUS, (SELECT @ROWNUM:=0) R
         <where>
-            PARASOL_ID = #{id}
+            <choose>
+                <when test="id != null">
+                    PARASOL_ID = #{id}
+                </when>
+                <otherwise>
+                    PARASOL_ID = null
+                </otherwise>
+            </choose>
         </where>
         ORDER BY DATE_TIME DESC, RN DESC
         <if test="endRn > 0">

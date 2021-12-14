@@ -3,7 +3,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="author" content="ThemeStarz">
 
-<!--CSS -->
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/bootstrap/css/bootstrap.min.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/font-awesome/css/fontawesome-all.min.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/jquery.scrollbar.css">

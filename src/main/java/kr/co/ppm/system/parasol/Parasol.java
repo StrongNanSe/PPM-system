@@ -13,9 +13,7 @@ public class Parasol implements Serializable {
     private String agentIpAddress;
     private String active;
 
-    public Parasol() {
-
-    }
+    public Parasol() {}
 
     public Parasol(String id) {
         this.id = id;
