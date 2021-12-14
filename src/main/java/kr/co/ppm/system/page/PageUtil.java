@@ -24,25 +24,25 @@ public class PageUtil {
         return page;
     }
 
-    public int getStartRn(int pageNo) {
+    private int getStartRn(int pageNo) {
         return (pageNo - 1) * ROW_SIZE;
     }
 
-    public int getEndRn(int pageNo) {
+    private int getEndRn(int pageNo) {
         return pageNo * ROW_SIZE;
     }
 
-    public int getFinalPageNo(int totallRowCount) {
+    private int getFinalPageNo(int totallRowCount) {
         return totallRowCount % ROW_SIZE != 0
                 ? totallRowCount / ROW_SIZE + 1
                 : totallRowCount / ROW_SIZE;
     }
 
-    public int getStartPage(int pageNo) {
+    private int getStartPage(int pageNo) {
         return ((pageNo - 1) / PAGE_SIZE) * PAGE_SIZE + 1;
     }
 
-    public int getEndPage(int startPage, int finalPage) {
+    private int getEndPage(int startPage, int finalPage) {
         int endPage = startPage + PAGE_SIZE - 1;
 
         if (endPage > finalPage) {
