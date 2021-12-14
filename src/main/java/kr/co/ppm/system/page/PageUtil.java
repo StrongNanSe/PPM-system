@@ -12,7 +12,6 @@ public class PageUtil {
 
     public Page setPage(String parasolId ,int totallRowCount, int pageNo) {
         Page page = new Page();
-
         page.setId(parasolId);
         page.setTotalRowCount(totallRowCount);
         page.setFinalPageNo(this.getFinalPageNo(totallRowCount));
@@ -93,7 +92,7 @@ public class PageUtil {
                 drawPage.append("</li>");
                 if ((page.getStartPageNo() - 25) > 0) {
                     drawPage.append("<li class=\"page-item\">");
-                    drawPage.append("    <a class=\"page-link border ts-btn-arrow\" href=\"javascript:void(0);\" onclick=\"pageOver(" + (page.getEndPageNo() -  25) + ")\">-5</a>");
+                    drawPage.append("    <a class=\"page-link border ts-btn-arrow\" href=\"javascript:void(0);\" onclick=\"pageOver(" + (page.getEndPageNo() -  (PAGE_SIZE * 5)) + ")\">-5</a>");
                     drawPage.append("</li>");
                 }
                 drawPage.append("<li class=\"page-item\">");
@@ -125,7 +124,7 @@ public class PageUtil {
                 drawPage.append("</li>");
                 if ((page.getStartPageNo() + 25) < page.getFinalPageNo()) {
                     drawPage.append("<li class=\"page-item\">");
-                    drawPage.append("    <a class=\"page-link border ts-btn-arrow\" href=\"javascript:void(0);\" onclick=\"pageOver(" + (page.getStartPageNo() +  25) + ")\">+5</a>");
+                    drawPage.append("    <a class=\"page-link border ts-btn-arrow\" href=\"javascript:void(0);\" onclick=\"pageOver(" + (page.getStartPageNo() +  (PAGE_SIZE * 5)) + ")\">+5</a>");
                     drawPage.append("</li>");
                 }
                 drawPage.append("<li class=\"page-item\">");

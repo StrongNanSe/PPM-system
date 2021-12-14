@@ -40,8 +40,6 @@ public class ParasolStatusServiceImpl implements ParasolStatusService {
     @Override
     public void receiveParasolStatus(ParasolStatus parasolStatus) {
         if (parasolMapper.selectById(new Parasol(parasolStatus.getParasolId())) != null) {
-            logger.debug("<-- receiveParasolStatus -->");
-
             parasolStatusMapper.insert(parasolStatus);
         }
     }

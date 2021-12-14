@@ -24,18 +24,14 @@ public class ControlServiceImpl implements ControlService{
     @Override
     public String sendControl(Parasol parasol, String action) {
         Parasol controlParasol = parasolMapper.selectById(parasol);
-
         actionList.put(controlParasol.getId(), action);
 
-        String agentIpAddress = parasolMapper.selectById(parasol).getAgentIpAddress();
-
-        String url = "http://" + agentIpAddress + "/device/" + action;
+        String url = "http://" + controlParasol.getAgentIpAddress() + "/device/" + action;
+        String responseCode = null;
 
         logger.info("----------INFO----------");
         logger.info("| Send This URL : " + url + " |");
         logger.info("------------------------");
-
-        String responseCode = null;
 
         try{
             OkHttpClient client = new OkHttpClient()
@@ -54,8 +50,6 @@ public class ControlServiceImpl implements ControlService{
                         : null;
             }
 
-            logger.debug(responseCode);
-
             if ("200".equals(responseCode.split(":")[1].split("\"")[1])) {
                 logger.info("----------INFO----------");
                 logger.info("| Send Control is Success |");
@@ -73,7 +67,6 @@ public class ControlServiceImpl implements ControlService{
             logger.info("----------INFO----------");
             logger.info("| Exception Occurred in method sendControl |");
             logger.info("------------------------");
-            e.printStackTrace();
         }
 
         return responseCode;
@@ -82,10 +75,8 @@ public class ControlServiceImpl implements ControlService{
     @Override
     public String analysisStatus(ParasolStatus parasolStatus) {
         String receiveId = parasolStatus.getParasolId();
-
         if (actionList.containsKey(receiveId)) {
             String sendAction = actionList.get(receiveId);
-
             if (!(sendAction.equals(parasolStatus.getStatus()))) {
                 return sendAction;
             }

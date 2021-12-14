@@ -21,8 +21,7 @@ public class AdminController {
     public ModelAndView loginForm() {
         ModelAndView modelAndView = new ModelAndView("admin/loginForm");
 
-        boolean loginCheck = adminMatch;
-        modelAndView.addObject("adminMatch", loginCheck);
+        modelAndView.addObject("adminMatch", adminMatch);
 
         adminMatch = true;
 

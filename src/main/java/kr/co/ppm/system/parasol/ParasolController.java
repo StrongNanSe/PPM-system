@@ -26,23 +26,34 @@ public class ParasolController {
     private ParasolService parasolService;
     @Autowired
     private ParasolStatusService parasolStatusService;
-    private Logger logger = LogManager.getLogger(ParasolController.class);
+    private static Logger logger = LogManager.getLogger(ParasolController.class);
     private static Properties ncpClientId;
 
     static {
         String ncpClientIdPath = "properties/ncpclientid.properties";
+
         ncpClientId = new Properties();
         try {
             ncpClientId.load(Resources.getResourceAsReader(ncpClientIdPath));
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.error("*********************ERROR*********************");
+            logger.error("* Not Found properties/ncpclientid.properties *");
+            logger.error("***********************************************");
         }
     }
 
     @GetMapping
     public ModelAndView viewParasolList() {
         ModelAndView modelAndView = new ModelAndView("parasol/main");
-        modelAndView.addObject("ncpClientId", ncpClientId.getProperty("ncpClientId"));
+        String ncpClientIdValue = ncpClientId.getProperty("ncpClientId");
+
+        if ("insertYourCLint".equals(ncpClientIdValue)) {
+            logger.error("**********************************ERROR***********************************");
+            logger.error("* Please put your ClientId in the properties/ncpclientid.properties file *");
+            logger.error("**************************************************************************");
+        }
+
+        modelAndView.addObject("ncpClientId", ncpClientIdValue);
 
         return modelAndView;
     }

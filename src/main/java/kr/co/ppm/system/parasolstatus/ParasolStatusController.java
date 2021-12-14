@@ -63,8 +63,6 @@ public class ParasolStatusController {
 
     @GetMapping(value="/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ParasolStatus viewParasolStatus(Parasol parasol) {
-        logger.debug(parasol);
-
         ParasolStatus newStatus = parasolStatusService.viewParasolStatus(parasol);
 
         logger.debug("==========DEBUG==========");
